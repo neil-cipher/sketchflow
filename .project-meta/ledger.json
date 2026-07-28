@@ -1,0 +1,48 @@
+{
+  "_comment": "CANONICAL. Mirror lives in 19. VITEEE/Info/PROJECTS/. On disagreement with the code, the CODE WINS (Rule 0) and this file is patched. Status is DERIVED from git log + CI on every run, never asserted.",
+  "subject": "Ishan Neil Bhargav",
+  "github": "neil-cipher",
+  "semester": 1,
+  "semester_context": "Sem-1, only CS course BCSE101E Python. GENTLE until after CAT-1 (09-Aug-2026).",
+  "active_project": {
+    "id": "s1p1",
+    "repo": "neil-cipher/sketchflow",
+    "title": "SketchFlow — a Count-Min Sketch you can break",
+    "spec_frozen": true,
+    "novelty_gate_passed": true,
+    "novelty_gate_note": "Skeptic-audited 27-Jul: KEEP-WITH-CHANGES applied. One hero structure (CMS+CU) + Space-Saving; adversarial-stress angle is the fresh contribution; honest 'empirical study' framing; ~28 steps; synthetic-first datasets.",
+    "standout_hook": "A Count-Min Sketch I tried to break — an adversarial stream generator that stresses the error bound, tested on real backbone traffic, showing where the textbook guarantee holds and where it doesn't.",
+    "real_world_angle": "benchmark-vs-exact-baseline + real-dataset (CIC-IDS-2017, MAWI) + adversarial empirical study",
+    "patent_angle": "NO — algorithms are public domain; README states this",
+    "plan_total_steps": 28,
+    "plan_immutable": true,
+    "step_pointer": 0,
+    "last_green_tag": null,
+    "head_sha_last_seen": null,
+    "ci_green_last_seen": null
+  },
+  "human_block": {
+    "active": false,
+    "step_id": "step-000",
+    "confirmed_owner": "neil-cipher",
+    "owner_confirmed_by_user": "2026-07-27",
+    "cleared_reason": "neil-cipher present in the Surface gh keyring (verified 27-Jul). Login block cleared.",
+    "device_findings_2026-07-27": {"gh_keyring_accounts": ["vir-cipher (active, Ansh)", "sudhanshubb", "neil-cipher (Ishan)"], "neilcipher_scopes": "gist,read:org,repo,workflow", "workflow_scope_granted": "2026-07-27 via device-flow authorize (user completed)", "note": "machine shared with Ansh (vir-cipher); active account can flip; active restored to vir-cipher after the refresh"},
+    "preflight_policy": "EVERY run, before any git op: `gh auth status`. (1) If neil-cipher NOT in keyring -> raise the login block with the baby-step guide and DIE (only case that involves the human). (2) If present -> `gh auth switch --user neil-cipher` (non-interactive; auto-corrects Ansh leaving vir-cipher active) + set git identity. (3) Workflow scope: neil-cipher NOW HAS 'workflow' (granted 27-Jul), so step-0 INCLUDES .github/workflows/ci.yml and real GitHub Actions CI. If a future token is ever found without it, fall back to local pytest as the green gate + a non-blocking optional-CI note (do not block).",
+    "cleared_by_human": true
+  },
+  "reconciliation_log": [
+    {"date": "2026-07-27", "event": "bootstrap", "ledger_said": "n/a", "code_was": "no repo yet", "action": "froze spec+plan; created scaffold locally; repo push pending human clearance"}
+  ],
+  "invariants_last_run": {
+    "no_regression": null,
+    "builds_clean": null,
+    "claim_sourced": null,
+    "author_is_neilcipher": null,
+    "all_passed": null
+  },
+  "steps": [],
+  "log": [
+    {"date": "2026-07-27", "step": 0, "note": "Bootstrap. Spec + immutable plan frozen. Scaffold staged. Awaiting first-push human clearance (Rule 8)."}
+  ]
+}

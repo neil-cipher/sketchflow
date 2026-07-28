@@ -1,0 +1,17 @@
+# SketchFlow — decisions.log (append-only; the project's own memory)
+
+## 2026-07-27 — BOOTSTRAP (day 0)
+- Project selected & frozen: SketchFlow — a Count-Min Sketch you can break.
+- Skeptic verdict: KEEP-WITH-CHANGES. Applied in full:
+  * Cut the "four-structure zoo" -> ONE hero (CMS + conservative-update) + Space-Saving top-k companion; Bloom = warm-up only; HyperLogLog OUT of core (optional stretch step 27).
+  * Novelty reframed: NOT "compared CU-CMS" (live academic subfield: INRIA / IEEE 2022 / arXiv 2405.12034 2024 / SIGMETRICS 2025). Instead: adversarial stream generator stressing the ε/δ guarantee; measure where the bound holds vs breaks on real backbone traffic.
+  * "Whitepaper" -> "empirical study / reproducibility + stress report." Patent: NO.
+  * 64 steps -> 28 substantive steps (anti green-square-farming).
+  * Datasets: synthetic Zipfian first (no download/root); CIC-IDS-2017 via Kaggle mirror; MAWI pcap; raw scapy self-capture optional/off critical path.
+- GitHub live check: neil-cipher has 3 repos (Consolidated_IITK_CodeBase_Ishan + forks requests, scapy). Empty enough that a flagship stands out.
+- Repo name chosen: neil-cipher/sketchflow (clean topical name > sem1-prefixed, for a recruiter-facing repo).
+- Alternatives rejected at selection: Aho-Corasick IDS matcher (kept as Sem-2 sequel), LSM/B-tree+WAL KV store (too heavy for Sem-1), Patricia/LC-trie router (thin benchmark story), all-four zoo (saturated).
+- HUMAN BLOCK raised (Rule 8): WRONG_GITHUB_ACCOUNT. Live device probe found `gh` logged in as `vir-cipher` (NOT `neil-cipher`), no global git user.name/email, IITK local clone not found within depth 4 of C:/Users/sudha. Refused to run `gh repo create` to avoid planting the flagship under the wrong account. Awaiting: neil-cipher auth on the Surface (or explicit confirmation to use vir-cipher) + git identity config. Recorded in ledger.human_block.device_findings.
+
+## Layman notes (4-line, per step) — appended as steps complete
+(step 0 note lands here once the scaffold is pushed and CI is green)
