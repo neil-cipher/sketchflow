@@ -45,3 +45,10 @@ As steps land, keep a running "you can now answer these" list at the bottom of t
 - Benchmarking & reproducibility — *how he proved the result, not just claimed it*
 
 **The daily job MUST:** read this file → pick the format in §C → append one dated step-explainer (newest on top) into the page `EXPLAINER` markers → add any new concept to §D's on-page index → keep the stumble (§A) and why-this (§B) stories pinned at the top, unchanged unless the project's framing genuinely changes.
+
+## E. FORMAT REVISION (31-Jul-2026, Suds — binding, supersedes §C style where they differ)
+- **Bullets only, never paragraphs.** Every page block: short bullets or simple tables. Layman language for a 2-weeks-in fresher.
+- **Ansh-style STEP-BY-STEP BUILD LOG** now lives inside the page's PROJ-STATUS markers: EVERY step (0–28, grouped rows for far-future phases) is its own collapsible with a status badge — `✓ DONE · <date>` (green) / `NEXT` (amber) / `UPCOMING` (grey). The daily run: flip the finished step's badge to DONE with date + fill its bullets (what / shipped: commit+CI / **commands used** in a `.cmd` block), set the next step to NEXT, keep only today's row open.
+- **Commands are mandatory** in every DONE step row AND in every Explainer diary card (`Commands:` line — e.g. `pytest -q`, `git push`, `gh repo create`).
+- **Explainer tab structure (pinned, don't restructure):** 1 stumble story (bullets) → 2 theory-from-zero (5 collapsible Ideas incl. ε and δ with worked numbers + one-sentence guarantee) → 3 open quandary (Known/Fuzzy/Why-care table) → 4 what SketchFlow does (3-move table) → 5 build diary (EXPLAINER markers, one card/step, ≤90 words, bullets+commands) → 6 interview index (EXPLAINER-INDEX markers). Daily run touches ONLY sections 5 & 6.
+- **NO DATE-GATING.** Build and refine the repo EVERY day — never park waiting for CAT-1 or any date. Small steps on busy days, bigger on free days; the repo moves daily.

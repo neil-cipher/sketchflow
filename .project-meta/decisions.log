@@ -15,3 +15,6 @@
 
 ## Layman notes (4-line, per step) — appended as steps complete
 (step 0 note lands here once the scaffold is pushed and CI is green)
+
+## 2026-07-28 - STEP 0 PUSHED (manual kickoff)
+- Repo LIVE: https://github.com/neil-cipher/sketchflow (public, main). Commit 22db207 authored neil-cipher <295313991+neil-cipher@users.noreply.github.com> (green squares attributed). GitHub Actions CI = SUCCESS (14s). Kicked off from the pinned session because the 07:00 chained runs kept parking on bridge-down mornings (anti-drift 'never build blind'). Daily job resumes at step 1 on its next fire.

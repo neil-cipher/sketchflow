@@ -3,7 +3,7 @@
   "subject": "Ishan Neil Bhargav",
   "github": "neil-cipher",
   "semester": 1,
-  "semester_context": "Sem-1, only CS course BCSE101E Python. GENTLE until after CAT-1 (09-Aug-2026).",
+  "semester_context": "Sem-1, only CS course BCSE101E Python. NO DATE-GATING (Suds, 31-Jul): build/refine EVERY day — small steps on busy days, bigger on free days; never park waiting for CAT-1 or any date.",
   "active_project": {
     "id": "s1p1",
     "repo": "neil-cipher/sketchflow",
@@ -16,10 +16,11 @@
     "patent_angle": "NO — algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 0,
+    "step_pointer": 2,
     "last_green_tag": null,
-    "head_sha_last_seen": null,
-    "ci_green_last_seen": null
+    "head_sha_last_seen": "3a8d5a1",
+    "ci_green_last_seen": "2026-07-31 success (12s)",
+    "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
     "active": false,
@@ -27,22 +28,65 @@
     "confirmed_owner": "neil-cipher",
     "owner_confirmed_by_user": "2026-07-27",
     "cleared_reason": "neil-cipher present in the Surface gh keyring (verified 27-Jul). Login block cleared.",
-    "device_findings_2026-07-27": {"gh_keyring_accounts": ["vir-cipher (active, Ansh)", "sudhanshubb", "neil-cipher (Ishan)"], "neilcipher_scopes": "gist,read:org,repo,workflow", "workflow_scope_granted": "2026-07-27 via device-flow authorize (user completed)", "note": "machine shared with Ansh (vir-cipher); active account can flip; active restored to vir-cipher after the refresh"},
+    "device_findings_2026-07-27": {
+      "gh_keyring_accounts": [
+        "vir-cipher (active, Ansh)",
+        "sudhanshubb",
+        "neil-cipher (Ishan)"
+      ],
+      "neilcipher_scopes": "gist,read:org,repo,workflow",
+      "workflow_scope_granted": "2026-07-27 via device-flow authorize (user completed)",
+      "note": "machine shared with Ansh (vir-cipher); active account can flip; active restored to vir-cipher after the refresh"
+    },
     "preflight_policy": "EVERY run, before any git op: `gh auth status`. (1) If neil-cipher NOT in keyring -> raise the login block with the baby-step guide and DIE (only case that involves the human). (2) If present -> `gh auth switch --user neil-cipher` (non-interactive; auto-corrects Ansh leaving vir-cipher active) + set git identity. (3) Workflow scope: neil-cipher NOW HAS 'workflow' (granted 27-Jul), so step-0 INCLUDES .github/workflows/ci.yml and real GitHub Actions CI. If a future token is ever found without it, fall back to local pytest as the green gate + a non-blocking optional-CI note (do not block).",
     "cleared_by_human": true
   },
   "reconciliation_log": [
-    {"date": "2026-07-27", "event": "bootstrap", "ledger_said": "n/a", "code_was": "no repo yet", "action": "froze spec+plan; created scaffold locally; repo push pending human clearance"}
+    {
+      "date": "2026-07-27",
+      "event": "bootstrap",
+      "ledger_said": "n/a",
+      "code_was": "no repo yet",
+      "action": "froze spec+plan; created scaffold locally; repo push pending human clearance"
+    },
+    {
+      "date": "2026-07-28",
+      "event": "step-0 pushed",
+      "ledger_said": "no repo",
+      "code_was": "repo created + CI green",
+      "action": "repo live at HEAD 22db207; step_pointer -> 1"
+    },
+    {
+      "date": "2026-07-31",
+      "event": "step-1 pushed",
+      "ledger_said": "pointer 1",
+      "code_was": "streams.py+baseline.py+4 tests at HEAD, CI green",
+      "action": "pointer -> 2"
+    }
   ],
   "invariants_last_run": {
-    "no_regression": null,
-    "builds_clean": null,
-    "claim_sourced": null,
-    "author_is_neilcipher": null,
-    "all_passed": null
+    "no_regression": true,
+    "builds_clean": true,
+    "claim_sourced": true,
+    "author_is_neilcipher": true,
+    "all_passed": true
   },
   "steps": [],
   "log": [
-    {"date": "2026-07-27", "step": 0, "note": "Bootstrap. Spec + immutable plan frozen. Scaffold staged. Awaiting first-push human clearance (Rule 8)."}
+    {
+      "date": "2026-07-27",
+      "step": 0,
+      "note": "Bootstrap. Spec + immutable plan frozen. Scaffold staged. Awaiting first-push human clearance (Rule 8)."
+    },
+    {
+      "date": "2026-07-28",
+      "step": 0,
+      "note": "STEP 0 DONE. Kicked off manually (bridge up, neil-cipher authed w/ workflow scope). gh repo create neil-cipher/sketchflow --public --push; commit 22db207 as neil-cipher <295313991+...>; GitHub Actions CI SUCCESS 14s. Next: step 1 (synthetic Zipfian generator + exact baseline)."
+    },
+    {
+      "date": "2026-07-31",
+      "step": 1,
+      "note": "STEP 1 DONE inline (user: build every day, no date-waiting). Zipfian stream + ExactCounter + 4 tests; commit 3a8d5a1; CI green 12s. GENTLE date-gating REMOVED from the job. Page redesigned: Ansh-style step-by-step build log w/ badges + commands; bullets-only Explainer."
+    }
   ]
 }
