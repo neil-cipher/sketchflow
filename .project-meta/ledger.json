@@ -16,10 +16,10 @@
     "patent_angle": "NO — algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 2,
+    "step_pointer": 4,
     "last_green_tag": null,
-    "head_sha_last_seen": "3a8d5a1",
-    "ci_green_last_seen": "2026-07-31 success (12s)",
+    "head_sha_last_seen": "3208dae",
+    "ci_green_last_seen": "2026-08-06 success (12s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -62,6 +62,20 @@
       "ledger_said": "pointer 1",
       "code_was": "streams.py+baseline.py+4 tests at HEAD, CI green",
       "action": "pointer -> 2"
+    },
+    {
+      "date": "2026-08-05",
+      "event": "step-2 pushed",
+      "ledger_said": "pointer 2",
+      "code_was": "hashing.py + 4 fairness tests at HEAD, CI green",
+      "action": "pointer -> 3; NOTE: chain queued and fired 05-Aug (01-04 Aug idle) — no drift, repo state clean"
+    },
+    {
+      "date": "2026-08-06",
+      "event": "step-3 pushed",
+      "ledger_said": "pointer 3",
+      "code_was": "bloom.py + 3 tests at HEAD, CI green",
+      "action": "pointer -> 4; chain fired ON TIME 07:01 IST"
     }
   ],
   "invariants_last_run": {
@@ -87,6 +101,16 @@
       "date": "2026-07-31",
       "step": 1,
       "note": "STEP 1 DONE inline (user: build every day, no date-waiting). Zipfian stream + ExactCounter + 4 tests; commit 3a8d5a1; CI green 12s. GENTLE date-gating REMOVED from the job. Page redesigned: Ansh-style step-by-step build log w/ badges + commands; bullets-only Explainer."
+    },
+    {
+      "date": "2026-08-05",
+      "step": 2,
+      "note": "STEP 2 DONE. Tabulation hashing (Zobrist 1970; Patrascu&Thorup J.ACM 2012), k independent seedable functions; fairness gates (uniform chi2 + independence). Tests caught a py3.11 tuple-seed TypeError pre-push. Commit 7b1ca0a; CI green 17s. Next: step 3 Bloom warm-up."
+    },
+    {
+      "date": "2026-08-06",
+      "step": 3,
+      "note": "STEP 3 DONE. BloomFilter on step-2 HashFamily; gates: zero false negatives (absolute) + measured FPR vs analytic (1-e^{-kn/m})^k (Bloom, CACM 1970). 11 tests green. Commit 3208dae; CI 12s. Next: step 4 Bloom sizing calculator."
     }
   ]
 }

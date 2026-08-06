@@ -18,3 +18,9 @@
 
 ## 2026-07-28 - STEP 0 PUSHED (manual kickoff)
 - Repo LIVE: https://github.com/neil-cipher/sketchflow (public, main). Commit 22db207 authored neil-cipher <295313991+neil-cipher@users.noreply.github.com> (green squares attributed). GitHub Actions CI = SUCCESS (14s). Kicked off from the pinned session because the 07:00 chained runs kept parking on bridge-down mornings (anti-drift 'never build blind'). Daily job resumes at step 1 on its next fire.
+
+## 2026-08-05 - STEP 2 (hash toolkit)
+- what: seedable tabulation hashing, k independent functions. why: the e/d promise rests on fair spreading - tested, not assumed. concept: uniform hashing + independence. next: Bloom warm-up. Commit 7b1ca0a, CI 17s. Lesson kept for the page: tests caught a Python 3.11 seeding TypeError before push.
+
+## 2026-08-06 - STEP 3 (Bloom warm-up)
+- what: bit-array membership sketch on the step-2 hash family. why: first taste of one-sided controlled error - can say 'maybe', never a false 'no'. concept: probabilistic membership, analytic FPR (Bloom CACM 1970). next: sizing calculator (n + target FPR -> m,k). Commit 3208dae, CI 12s.
