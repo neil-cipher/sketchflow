@@ -3,23 +3,23 @@
   "subject": "Ishan Neil Bhargav",
   "github": "neil-cipher",
   "semester": 1,
-  "semester_context": "Sem-1, only CS course BCSE101E Python. NO DATE-GATING (Suds, 31-Jul): build/refine EVERY day — small steps on busy days, bigger on free days; never park waiting for CAT-1 or any date.",
+  "semester_context": "Sem-1, only CS course BCSE101E Python. NO DATE-GATING (Suds, 31-Jul): build/refine EVERY day \u2014 small steps on busy days, bigger on free days; never park waiting for CAT-1 or any date.",
   "active_project": {
     "id": "s1p1",
     "repo": "neil-cipher/sketchflow",
-    "title": "SketchFlow — a Count-Min Sketch you can break",
+    "title": "SketchFlow \u2014 a Count-Min Sketch you can break",
     "spec_frozen": true,
     "novelty_gate_passed": true,
     "novelty_gate_note": "Skeptic-audited 27-Jul: KEEP-WITH-CHANGES applied. One hero structure (CMS+CU) + Space-Saving; adversarial-stress angle is the fresh contribution; honest 'empirical study' framing; ~28 steps; synthetic-first datasets.",
-    "standout_hook": "A Count-Min Sketch I tried to break — an adversarial stream generator that stresses the error bound, tested on real backbone traffic, showing where the textbook guarantee holds and where it doesn't.",
+    "standout_hook": "A Count-Min Sketch I tried to break \u2014 an adversarial stream generator that stresses the error bound, tested on real backbone traffic, showing where the textbook guarantee holds and where it doesn't.",
     "real_world_angle": "benchmark-vs-exact-baseline + real-dataset (CIC-IDS-2017, MAWI) + adversarial empirical study",
-    "patent_angle": "NO — algorithms are public domain; README states this",
+    "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 4,
+    "step_pointer": 6,
     "last_green_tag": null,
-    "head_sha_last_seen": "3208dae",
-    "ci_green_last_seen": "2026-08-06 success (12s)",
+    "head_sha_last_seen": "e2df3f4",
+    "ci_green_last_seen": "2026-08-08 success (19s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -68,7 +68,7 @@
       "event": "step-2 pushed",
       "ledger_said": "pointer 2",
       "code_was": "hashing.py + 4 fairness tests at HEAD, CI green",
-      "action": "pointer -> 3; NOTE: chain queued and fired 05-Aug (01-04 Aug idle) — no drift, repo state clean"
+      "action": "pointer -> 3; NOTE: chain queued and fired 05-Aug (01-04 Aug idle) \u2014 no drift, repo state clean"
     },
     {
       "date": "2026-08-06",
@@ -76,6 +76,20 @@
       "ledger_said": "pointer 3",
       "code_was": "bloom.py + 3 tests at HEAD, CI green",
       "action": "pointer -> 4; chain fired ON TIME 07:01 IST"
+    },
+    {
+      "date": "2026-08-07",
+      "event": "bridge outage",
+      "ledger_said": "pointer 4",
+      "code_was": "step 4 built+green in container, Surface offline all day (6 parked ship attempts 07-08 Aug)",
+      "action": "no push; backlog held; NO drift \u2014 page untouched, never claimed DONE ahead of CI"
+    },
+    {
+      "date": "2026-08-08",
+      "event": "steps 4+5 pushed (backlog reconcile)",
+      "ledger_said": "pointer 4",
+      "code_was": "sizing.py+cms.py+9 tests at HEAD, CI green",
+      "action": "two commits ad72e7c (step 4) + e2df3f4 (step 5); pointer -> 6"
     }
   ],
   "invariants_last_run": {
@@ -111,6 +125,16 @@
       "date": "2026-08-06",
       "step": 3,
       "note": "STEP 3 DONE. BloomFilter on step-2 HashFamily; gates: zero false negatives (absolute) + measured FPR vs analytic (1-e^{-kn/m})^k (Bloom, CACM 1970). 11 tests green. Commit 3208dae; CI 12s. Next: step 4 Bloom sizing calculator."
+    },
+    {
+      "date": "2026-08-08",
+      "step": 4,
+      "note": "STEP 4 DONE. size_bloom(n, target_fpr) -> (m,k): m=ceil(-n ln p/ln^2 2), best-of-floor/ceil k, plus promise-keeping m-bump (k-rounding left analytic 0.01004>0.01 - a sizing calculator must deliver its promise exactly). Gate: analytic <= target exactly + measured FPR within 3-sigma on 50k probes. Commit ad72e7c."
+    },
+    {
+      "date": "2026-08-08",
+      "step": 5,
+      "note": "STEP 5 DONE. CountMinSketch(width,depth,seed) on the step-2 HashFamily: depth x width counter matrix, weighted add, row_values. Gate: never-undercount invariant for every key of a 10k Zipfian stream vs ExactCounter under heavy collisions (width 256/8). 20 tests green. Commit e2df3f4, CI 19s. Next: step 6 min-query + eps/delta sizing -> first green tag."
     }
   ]
 }

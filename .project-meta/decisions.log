@@ -24,3 +24,8 @@
 
 ## 2026-08-06 - STEP 3 (Bloom warm-up)
 - what: bit-array membership sketch on the step-2 hash family. why: first taste of one-sided controlled error - can say 'maybe', never a false 'no'. concept: probabilistic membership, analytic FPR (Bloom CACM 1970). next: sizing calculator (n + target FPR -> m,k). Commit 3208dae, CI 12s.
+
+## 2026-08-08 - STEPS 4+5 (backlog reconcile after 2-day Surface outage)
+- step 4: what: sizing calculator n+target FPR -> (m,k). why: first hands-on 'buy accuracy with memory' (~1.44 bits/item per halving of error). lesson kept for the page: textbook k-rounding broke the promise (analytic 0.01004 > 0.01); fixed with best-k + m-bump so the maths delivers exactly. Commit ad72e7c.
+- step 5: what: CMS skeleton - depth x width counters on the step-2 hash family. why: the hero begins; concept: never-undercount invariant (collisions only inflate). gate: every counter >= true count across a 10k Zipfian stream. Commit e2df3f4, CI 19s. next: min-query + eps/delta sizing (step 6, first green tag).
+- ops note: 07-Aug bridge outage handled cleanly - chain armed first, build done in container, ship parked, page never claimed DONE ahead of CI. Two-step catch-up shipped as two separate commits to keep per-step history honest.
