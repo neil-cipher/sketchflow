@@ -29,3 +29,9 @@
 - step 4: what: sizing calculator n+target FPR -> (m,k). why: first hands-on 'buy accuracy with memory' (~1.44 bits/item per halving of error). lesson kept for the page: textbook k-rounding broke the promise (analytic 0.01004 > 0.01); fixed with best-k + m-bump so the maths delivers exactly. Commit ad72e7c.
 - step 5: what: CMS skeleton - depth x width counters on the step-2 hash family. why: the hero begins; concept: never-undercount invariant (collisions only inflate). gate: every counter >= true count across a 10k Zipfian stream. Commit e2df3f4, CI 19s. next: min-query + eps/delta sizing (step 6, first green tag).
 - ops note: 07-Aug bridge outage handled cleanly - chain armed first, build done in container, ship parked, page never claimed DONE ahead of CI. Two-step catch-up shipped as two separate commits to keep per-step history honest.
+
+## 2026-08-09 - STEP 6 (CMS min-query + ε/δ sizing) + FIRST CHECKPOINT TAG
+- what: query() = min of row counters (the tightest overestimate) + size_cms(ε,δ) → (width=⌈e/ε⌉, depth=⌈ln(1/δ)⌉). why: this completes the hero's core guarantee — now we can SIZE a sketch for a target accuracy AND QUERY it, and the additive error bound holds. concept: the ε·N additive error bound + min-estimator. next: step 7, memory accounting + serialize/deserialize.
+- gate design note: the ε/δ guarantee is PER-KEY (for any fixed key x, P(error > ε·N) ≤ δ over hash randomness), not simultaneous across all keys. Initial test checked all keys per trial and saw 12.5% failure rate (union bound inflates it). Redesigned: 300 seeds, per-key failure rate checked on top-10 heavy hitters individually, each ≤ 3·δ margin. Passes cleanly.
+- tag: green-sketchflow-1 cut at commit 1e6bae1 — 7 green steps (0–6), the first checkpoint per Rule 6.
+- Commit 1e6bae1, CI 34s.

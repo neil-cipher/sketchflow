@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 6,
-    "last_green_tag": null,
-    "head_sha_last_seen": "e2df3f4",
-    "ci_green_last_seen": "2026-08-08 success (19s)",
+    "step_pointer": 7,
+    "last_green_tag": "green-sketchflow-1",
+    "head_sha_last_seen": "1e6bae1",
+    "ci_green_last_seen": "2026-08-09 success (34s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -90,6 +90,13 @@
       "ledger_said": "pointer 4",
       "code_was": "sizing.py+cms.py+9 tests at HEAD, CI green",
       "action": "two commits ad72e7c (step 4) + e2df3f4 (step 5); pointer -> 6"
+    },
+    {
+      "date": "2026-08-09",
+      "event": "step 6 pushed + first checkpoint tag",
+      "ledger_said": "pointer 6",
+      "code_was": "cms.py query()+size_cms()+8 tests at HEAD, CI green",
+      "action": "commit 1e6bae1 (step 6); tag green-sketchflow-1; pointer -> 7"
     }
   ],
   "invariants_last_run": {
@@ -135,6 +142,11 @@
       "date": "2026-08-08",
       "step": 5,
       "note": "STEP 5 DONE. CountMinSketch(width,depth,seed) on the step-2 HashFamily: depth x width counter matrix, weighted add, row_values. Gate: never-undercount invariant for every key of a 10k Zipfian stream vs ExactCounter under heavy collisions (width 256/8). 20 tests green. Commit e2df3f4, CI 19s. Next: step 6 min-query + eps/delta sizing -> first green tag."
+    },
+    {
+      "date": "2026-08-09",
+      "step": 6,
+      "note": "STEP 6 DONE. query()=min(row_values) + size_cms(eps,delta)->(ceil(e/eps),ceil(ln(1/delta))). Gate: per-key failure rate ≤ δ across 300 seeds on 10k Zipfian stream (top-10 heavy hitters each checked). 28 tests green. Commit 1e6bae1, CI 34s. Tag green-sketchflow-1 cut (7 green steps 0-6). Next: step 7 memory accounting + serialize/deserialize."
     }
   ]
 }
