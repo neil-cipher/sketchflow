@@ -22,6 +22,13 @@ error bound guarantees:
 when width = ⌈e/ε⌉ and depth = ⌈ln(1/δ)⌉ (Cormode & Muthukrishnan 2005,
 Theorem 1). ``size_cms(epsilon, delta)`` computes those parameters.
 
+**Step 7** adds honest memory accounting (``bytes_used()``) and compact
+binary serialization (``to_bytes()`` / ``from_bytes()``).  The Python
+in-memory cost of a list-of-lists of ints is far larger than the
+mathematical minimum (depth × width × 8 bytes) — ``bytes_used()``
+reports the real footprint via ``sys.getsizeof``, and the serialized
+form shows what a C implementation would actually cost.
+
 Reference: Cormode & Muthukrishnan, "An improved data stream summary:
 the count-min sketch and its applications", J. Algorithms 55 (2005).
 """
@@ -29,6 +36,8 @@ the count-min sketch and its applications", J. Algorithms 55 (2005).
 from __future__ import annotations
 
 import math
+import struct
+import sys
 
 from sketchflow.hashing import HashFamily
 
@@ -83,6 +92,86 @@ class CountMinSketch:
             row[bucket]
             for row, bucket in zip(self.rows, self.family.buckets(key))
         ]
+
+    # ── Step 7: memory accounting ─────────────────────────────────
+
+    def bytes_used(self) -> int:
+        """Actual Python memory footprint of the counter matrix.
+
+        Walks ``self.rows`` with ``sys.getsizeof`` to measure what the
+        interpreter really allocated — outer list + each inner list +
+        every integer object.  This is deliberately honest: a Python
+        list-of-lists-of-ints is far heavier than a packed C array
+        (typically ~4× on CPython for small counters).  The gap matters
+        when comparing sketch memory against an exact ``dict`` baseline.
+        """
+        total = sys.getsizeof(self.rows)           # outer list header
+        for row in self.rows:
+            total += sys.getsizeof(row)             # inner list header
+            for cell in row:
+                total += sys.getsizeof(cell)        # int object
+        return total
+
+    # ── Step 7: serialization ─────────────────────────────────────
+
+    _HEADER_FMT = "<IIqQ"   # width(u32) depth(u32) seed(i64) total(u64)
+    _HEADER_SIZE = struct.calcsize(_HEADER_FMT)   # 24 bytes
+
+    def to_bytes(self) -> bytes:
+        """Serialize to a compact binary blob.
+
+        Layout (little-endian, row-major):
+
+            24 bytes   header  (width · depth · seed · total)
+            depth × width × 8  counters  (each uint64)
+
+        The packed size equals ``24 + depth * width * 8`` — the
+        mathematical minimum for 64-bit counters.  Compare with
+        ``bytes_used()`` to see the Python overhead.
+        """
+        header = struct.pack(self._HEADER_FMT,
+                             self.width, self.depth, self.seed, self.total)
+        # Pack all counters row-major as uint64.
+        counters = struct.pack(
+            f"<{self.depth * self.width}Q",
+            *(cell for row in self.rows for cell in row),
+        )
+        return header + counters
+
+    @classmethod
+    def from_bytes(cls, data: bytes) -> "CountMinSketch":
+        """Reconstruct a sketch from a ``to_bytes()`` blob.
+
+        The hash family is re-seeded from the stored seed, so every
+        query on the restored sketch returns the same result as the
+        original — that is the round-trip guarantee step 7 tests.
+
+        Raises
+        ------
+        ValueError
+            If the blob is truncated or the wrong size.
+        """
+        if len(data) < cls._HEADER_SIZE:
+            raise ValueError(
+                f"blob too short for header: {len(data)} < {cls._HEADER_SIZE}"
+            )
+        width, depth, seed, total = struct.unpack(
+            cls._HEADER_FMT, data[: cls._HEADER_SIZE]
+        )
+        expected = cls._HEADER_SIZE + depth * width * 8
+        if len(data) != expected:
+            raise ValueError(
+                f"blob size mismatch: got {len(data)}, expected {expected}"
+            )
+        sketch = cls(width=width, depth=depth, seed=seed)
+        sketch.total = total
+        counters = struct.unpack(
+            f"<{depth * width}Q", data[cls._HEADER_SIZE :]
+        )
+        for r in range(depth):
+            for c in range(width):
+                sketch.rows[r][c] = counters[r * width + c]
+        return sketch
 
 
 def size_cms(epsilon: float, delta: float) -> tuple[int, int]:
