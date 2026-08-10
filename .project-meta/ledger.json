@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 7,
+    "step_pointer": 8,
     "last_green_tag": "green-sketchflow-1",
-    "head_sha_last_seen": "1e6bae1",
-    "ci_green_last_seen": "2026-08-09 success (34s)",
+    "head_sha_last_seen": "9912643",
+    "ci_green_last_seen": "2026-08-10 success (35s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -97,6 +97,13 @@
       "ledger_said": "pointer 6",
       "code_was": "cms.py query()+size_cms()+8 tests at HEAD, CI green",
       "action": "commit 1e6bae1 (step 6); tag green-sketchflow-1; pointer -> 7"
+    },
+    {
+      "date": "2026-08-10",
+      "event": "step 7 pushed",
+      "ledger_said": "pointer 7",
+      "code_was": "cms.py bytes_used()+to_bytes()+from_bytes()+10 tests at HEAD, CI green",
+      "action": "commit 9912643 (step 7); pointer -> 8"
     }
   ],
   "invariants_last_run": {
@@ -147,6 +154,11 @@
       "date": "2026-08-09",
       "step": 6,
       "note": "STEP 6 DONE. query()=min(row_values) + size_cms(eps,delta)->(ceil(e/eps),ceil(ln(1/delta))). Gate: per-key failure rate ≤ δ across 300 seeds on 10k Zipfian stream (top-10 heavy hitters each checked). 28 tests green. Commit 1e6bae1, CI 34s. Tag green-sketchflow-1 cut (7 green steps 0-6). Next: step 7 memory accounting + serialize/deserialize."
+    },
+    {
+      "date": "2026-08-10",
+      "step": 7,
+      "note": "STEP 7 DONE. bytes_used() via recursive sys.getsizeof (honest Python overhead) + to_bytes()/from_bytes() compact binary serialization (24-byte header + depth*width*8 counters). Gate: bytes_used == independent measurement; round-trip preserves every query and row_values; blob size == 24+d*w*8; corrupt blobs raise ValueError. 38 tests green. Commit 9912643, CI 35s. Next: step 8, CMS inner-product / join-size estimate."
     }
   ]
 }

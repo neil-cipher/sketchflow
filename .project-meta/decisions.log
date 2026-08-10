@@ -35,3 +35,8 @@
 - gate design note: the ε/δ guarantee is PER-KEY (for any fixed key x, P(error > ε·N) ≤ δ over hash randomness), not simultaneous across all keys. Initial test checked all keys per trial and saw 12.5% failure rate (union bound inflates it). Redesigned: 300 seeds, per-key failure rate checked on top-10 heavy hitters individually, each ≤ 3·δ margin. Passes cleanly.
 - tag: green-sketchflow-1 cut at commit 1e6bae1 — 7 green steps (0–6), the first checkpoint per Rule 6.
 - Commit 1e6bae1, CI 34s.
+
+## 2026-08-10 - STEP 7 (CMS memory accounting + serialize/deserialize)
+- what: bytes_used() measures real Python memory via recursive sys.getsizeof; to_bytes()/from_bytes() for compact binary round-trip. why: honest memory measurement matters — Python list-of-lists overhead is ~4× the packed minimum; comparing sketch vs exact-dict memory is meaningless without measuring what the interpreter actually allocated. concept: measuring real memory footprint honestly; serialization as the bridge between in-memory and on-disk. next: step 8, CMS inner-product / join-size estimate between two sketches.
+- gate design note: bytes_used walks outer list + each inner list + every int cell with sys.getsizeof; test independently recomputes the same walk and asserts equality. Serialization uses struct.pack little-endian: 24-byte header (width u32 + depth u32 + seed i64 + total u64) then row-major uint64 counters. from_bytes validates header length and total blob size; corrupt inputs raise ValueError. 10 new tests, 38 total green.
+- Commit 9912643, CI 35s.
