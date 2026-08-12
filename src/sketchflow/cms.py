@@ -29,6 +29,13 @@ mathematical minimum (depth × width × 8 bytes) — ``bytes_used()``
 reports the real footprint via ``sys.getsizeof``, and the serialized
 form shows what a C implementation would actually cost.
 
+**Step 8** adds ``inner_product(other)`` — the join-size estimator.
+Given two sketches built over different streams but sharing the same
+hash functions, the inner product of their frequency vectors is
+estimated as the minimum row-wise dot product of the counter arrays.
+This is useful for join-size estimation, self-join (L2 norm squared),
+and similarity queries between data streams.
+
 Reference: Cormode & Muthukrishnan, "An improved data stream summary:
 the count-min sketch and its applications", J. Algorithms 55 (2005).
 """
@@ -92,6 +99,72 @@ class CountMinSketch:
             row[bucket]
             for row, bucket in zip(self.rows, self.family.buckets(key))
         ]
+
+    # ── Step 8: inner product / join-size estimate ─────────────────
+
+    def inner_product(self, other: "CountMinSketch") -> int:
+        """Estimate the inner product (dot product) of two frequency vectors.
+
+        Given stream *a* counted in ``self`` and stream *b* counted in
+        ``other``, the true inner product is:
+
+            ⟨f_a, f_b⟩ = Σ_x  f_a(x) · f_b(x)
+
+        This is the *join size* of the two streams — the number of
+        matching pairs.  The CMS estimate (Cormode & Muthukrishnan 2005,
+        Section 3) takes the **minimum** across rows of the per-row dot
+        product of the counter arrays:
+
+            estimate = min_d  Σ_j  A[d][j] · B[d][j]
+
+        Because collisions only inflate individual counters, each row's
+        dot product is an overestimate of the true inner product.  Taking
+        the minimum gives the tightest one, and the error bound is:
+
+            estimate − ⟨f_a, f_b⟩  ≤  ε · ‖a‖₁ · ‖b‖₁
+
+        with probability ≥ 1 − δ, where ‖a‖₁ and ‖b‖₁ are the stream
+        lengths (``self.total`` and ``other.total``).
+
+        Both sketches **must** use the same width, depth, and seed
+        (i.e. the same hash functions) — otherwise the row-wise dot
+        product is meaningless.
+
+        Parameters
+        ----------
+        other : CountMinSketch
+            The second sketch. Must share width, depth, and seed.
+
+        Returns
+        -------
+        int
+            The estimated inner product (always ≥ the true value).
+
+        Raises
+        ------
+        ValueError
+            If the two sketches have different dimensions or seeds.
+
+        Reference
+        ---------
+        Cormode & Muthukrishnan, "An improved data stream summary:
+        the count-min sketch and its applications", J. Algorithms 55
+        (2005), Section 3.
+        """
+        if self.width != other.width or self.depth != other.depth:
+            raise ValueError(
+                f"dimension mismatch: {self.width}x{self.depth} vs "
+                f"{other.width}x{other.depth}"
+            )
+        if self.seed != other.seed:
+            raise ValueError(
+                f"seed mismatch: {self.seed} vs {other.seed} — both "
+                f"sketches must share the same hash functions"
+            )
+        return min(
+            sum(a * b for a, b in zip(row_a, row_b))
+            for row_a, row_b in zip(self.rows, other.rows)
+        )
 
     # ── Step 7: memory accounting ─────────────────────────────────
 
