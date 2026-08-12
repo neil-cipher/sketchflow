@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 8,
+    "step_pointer": 9,
     "last_green_tag": "green-sketchflow-1",
-    "head_sha_last_seen": "9912643",
-    "ci_green_last_seen": "2026-08-10 success (35s)",
+    "head_sha_last_seen": "51397cc",
+    "ci_green_last_seen": "2026-08-12 success (52s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -104,6 +104,13 @@
       "ledger_said": "pointer 7",
       "code_was": "cms.py bytes_used()+to_bytes()+from_bytes()+10 tests at HEAD, CI green",
       "action": "commit 9912643 (step 7); pointer -> 8"
+    },
+    {
+      "date": "2026-08-12",
+      "event": "step 8 pushed (reconciled from orphaned working-tree build)",
+      "ledger_said": "pointer 8",
+      "code_was": "cms.py inner_product()+11 tests at HEAD (built by prior run, uncommitted), CI green",
+      "action": "commit 51397cc (step 8); pointer -> 9"
     }
   ],
   "invariants_last_run": {
@@ -159,6 +166,11 @@
       "date": "2026-08-10",
       "step": 7,
       "note": "STEP 7 DONE. bytes_used() via recursive sys.getsizeof (honest Python overhead) + to_bytes()/from_bytes() compact binary serialization (24-byte header + depth*width*8 counters). Gate: bytes_used == independent measurement; round-trip preserves every query and row_values; blob size == 24+d*w*8; corrupt blobs raise ValueError. 38 tests green. Commit 9912643, CI 35s. Next: step 8, CMS inner-product / join-size estimate."
+    },
+    {
+      "date": "2026-08-12",
+      "step": 8,
+      "note": "STEP 8 DONE. inner_product(other) = min over rows of row-wise dot product (Cormode & Muthukrishnan 2005, Section 3). Validates dimension+seed match. Gate: 200 seeds, two 5k Zipfian streams, violation rate (est - true > ε·N_a·N_b) ≤ 3·δ. Also: never undercounts, symmetric, self-join ≈ L2², disjoint streams bounded, weighted adds correct. 11 new tests, 49 total green. Commit 51397cc, CI 52s. Next: step 9, conservative-update CMS."
     }
   ]
 }
