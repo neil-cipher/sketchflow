@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 9,
+    "step_pointer": 10,
     "last_green_tag": "green-sketchflow-1",
-    "head_sha_last_seen": "51397cc",
-    "ci_green_last_seen": "2026-08-12 success (52s)",
+    "head_sha_last_seen": "604496b",
+    "ci_green_last_seen": "2026-08-13 success (54s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -111,6 +111,13 @@
       "ledger_said": "pointer 8",
       "code_was": "cms.py inner_product()+11 tests at HEAD (built by prior run, uncommitted), CI green",
       "action": "commit 51397cc (step 8); pointer -> 9"
+    },
+    {
+      "date": "2026-08-13",
+      "event": "step 9 pushed",
+      "ledger_said": "pointer 9",
+      "code_was": "cu_cms.py ConservativeUpdateCMS subclass+12 tests at HEAD, CI green",
+      "action": "commit 604496b (step 9); pointer -> 10"
     }
   ],
   "invariants_last_run": {
@@ -171,6 +178,11 @@
       "date": "2026-08-12",
       "step": 8,
       "note": "STEP 8 DONE. inner_product(other) = min over rows of row-wise dot product (Cormode & Muthukrishnan 2005, Section 3). Validates dimension+seed match. Gate: 200 seeds, two 5k Zipfian streams, violation rate (est - true > ε·N_a·N_b) ≤ 3·δ. Also: never undercounts, symmetric, self-join ≈ L2², disjoint streams bounded, weighted adds correct. 11 new tests, 49 total green. Commit 51397cc, CI 52s. Next: step 9, conservative-update CMS."
+    },
+    {
+      "date": "2026-08-13",
+      "step": 9,
+      "note": "STEP 9 DONE. ConservativeUpdateCMS subclass: overrides add() to only bump counters at or below the current minimum estimate (Estan & Varghese, SIGCOMM 2002, §4.2). Gate: for every key on a 10k Zipfian stream, CU estimate ≤ plain-CMS estimate AND CU estimate ≥ true count (never undercounts). Also: total CU overestimation strictly < plain CMS (by >20%), weighted adds correct, inherited inner_product/serialize/bytes_used all work, round-trip preserves state. 12 new tests, 61 total green. Commit 604496b, CI 54s. Next: step 10, Space-Saving top-k."
     }
   ]
 }

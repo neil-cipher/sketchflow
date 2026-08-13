@@ -46,3 +46,8 @@
 - gate design note: error bound ε·‖a‖₁·‖b‖₁ tested across 200 hash seeds on two 5k Zipfian streams; empirical violation rate ≤ 3·δ margin. Also verified: never undercounts (est ≥ true), symmetric, self-join ≈ L2² (within 5% on low-collision setup), disjoint universes bounded, weighted adds correct, dimension/seed mismatches rejected. 11 new tests, 49 total green.
 - reconciliation note: code was built by a prior run but left uncommitted in the working tree (orphaned build). Verified tests pass, committed and pushed as today's step.
 - Commit 51397cc, CI 52s.
+
+## 2026-08-13 - STEP 9 (conservative-update CMS)
+- what: ConservativeUpdateCMS — subclass that overrides add() to only bump the lowest counters. why: standard CMS blindly increments all d counters, piling collision noise on already-inflated values; CU checks the current minimum estimate first and leaves higher counters alone, cutting overestimation without sacrificing the never-undercount guarantee. concept: conservative update reduces overestimation error (Estan & Varghese, SIGCOMM 2002). next: step 10, Space-Saving top-k (bounded-memory heavy hitters with monitored counters + eviction).
+- gate design note: core gate tests CU ≤ plain CMS AND ≥ true count for every key on a 10k Zipfian stream (same hash seed, same stream). Also verified: total CU overestimation is strictly and meaningfully less than CMS (>20% reduction on skewed data); never-undercount holds across 50 seeds on a narrow sketch (width 64); weighted adds, serialization round-trip, inner_product, bytes_used all inherited correctly. 12 new tests, 61 total green.
+- Commit 604496b, CI 54s.
