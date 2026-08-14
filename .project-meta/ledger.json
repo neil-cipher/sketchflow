@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 10,
+    "step_pointer": 11,
     "last_green_tag": "green-sketchflow-1",
-    "head_sha_last_seen": "604496b",
-    "ci_green_last_seen": "2026-08-13 success (54s)",
+    "head_sha_last_seen": "1b8eb2b",
+    "ci_green_last_seen": "2026-08-14 success (54s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -118,6 +118,13 @@
       "ledger_said": "pointer 9",
       "code_was": "cu_cms.py ConservativeUpdateCMS subclass+12 tests at HEAD, CI green",
       "action": "commit 604496b (step 9); pointer -> 10"
+    },
+    {
+      "date": "2026-08-14",
+      "event": "step 10 pushed",
+      "ledger_said": "pointer 10",
+      "code_was": "space_saving.py SpaceSaving class+19 tests at HEAD, CI green",
+      "action": "commit 1b8eb2b (step 10); pointer -> 11"
     }
   ],
   "invariants_last_run": {
@@ -183,6 +190,11 @@
       "date": "2026-08-13",
       "step": 9,
       "note": "STEP 9 DONE. ConservativeUpdateCMS subclass: overrides add() to only bump counters at or below the current minimum estimate (Estan & Varghese, SIGCOMM 2002, §4.2). Gate: for every key on a 10k Zipfian stream, CU estimate ≤ plain-CMS estimate AND CU estimate ≥ true count (never undercounts). Also: total CU overestimation strictly < plain CMS (by >20%), weighted adds correct, inherited inner_product/serialize/bytes_used all work, round-trip preserves state. 12 new tests, 61 total green. Commit 604496b, CI 54s. Next: step 10, Space-Saving top-k."
+    },
+    {
+      "date": "2026-08-14",
+      "step": 10,
+      "note": "STEP 10 DONE. SpaceSaving(k) — bounded-memory heavy hitter tracker: at most k monitored counters; when full, evicts the minimum-count entry and the newcomer inherits evicted_count+1 (Metwally, Agrawal & El Abbadi, ICDT 2005). Gate: on Zipfian streams with heavy hitters above the N/k threshold, every such key is present in the monitored set; top-k keys match the exact baseline; monitored estimates are always ≥ true counts (overestimate). Also: eviction mechanics, weighted adds, k=1 edge case, capacity never exceeded, tie-breaking deterministic. 19 new tests, 80 total green. Commit 1b8eb2b, CI 54s. Next: step 11, Space-Saving min-heap + hash index for O(log k) update."
     }
   ]
 }
