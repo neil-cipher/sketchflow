@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 11,
+    "step_pointer": 12,
     "last_green_tag": "green-sketchflow-1",
-    "head_sha_last_seen": "1b8eb2b",
-    "ci_green_last_seen": "2026-08-14 success (54s)",
+    "head_sha_last_seen": "139b17b",
+    "ci_green_last_seen": "2026-08-15 success (53s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -125,6 +125,13 @@
       "ledger_said": "pointer 10",
       "code_was": "space_saving.py SpaceSaving class+19 tests at HEAD, CI green",
       "action": "commit 1b8eb2b (step 10); pointer -> 11"
+    },
+    {
+      "date": "2026-08-15",
+      "event": "step 11 pushed",
+      "ledger_said": "pointer 11",
+      "code_was": "space_saving.py refactored to min-heap+hash index+16 new tests at HEAD, CI green",
+      "action": "commit 139b17b (step 11); pointer -> 12"
     }
   ],
   "invariants_last_run": {
@@ -195,6 +202,11 @@
       "date": "2026-08-14",
       "step": 10,
       "note": "STEP 10 DONE. SpaceSaving(k) — bounded-memory heavy hitter tracker: at most k monitored counters; when full, evicts the minimum-count entry and the newcomer inherits evicted_count+1 (Metwally, Agrawal & El Abbadi, ICDT 2005). Gate: on Zipfian streams with heavy hitters above the N/k threshold, every such key is present in the monitored set; top-k keys match the exact baseline; monitored estimates are always ≥ true counts (overestimate). Also: eviction mechanics, weighted adds, k=1 edge case, capacity never exceeded, tie-breaking deterministic. 19 new tests, 80 total green. Commit 1b8eb2b, CI 54s. Next: step 11, Space-Saving min-heap + hash index for O(log k) update."
+    },
+    {
+      "date": "2026-08-15",
+      "step": 11,
+      "note": "STEP 11 DONE. SpaceSaving internals upgraded to min-heap (heapq) + hash index for O(log k) add() — same external API, same results, faster at large k. Heap entries are [count, seq, key] lists; seq monotonic for FIFO tie-breaking; _index dict maps key→entry for O(1) lookup. Bump = update count in-place + sift-down; eviction = overwrite root + sift-down. _assert_heap_invariant() verifies heap property + index↔counters consistency. Gate: all step-10 behavioral tests still pass (guarantee, overestimate, eviction, top-k ordering); heap invariant holds after every mutation pattern (inserts, bumps, evictions, weighted, k=1); throughput at k=2000 stays >15% of k=50 (O(log k) scaling confirmed). 16 new tests, 96 total green. Commit 139b17b, CI 53s. Next: step 12, CMS + Space-Saving combined engine."
     }
   ]
 }
