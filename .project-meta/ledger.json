@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 12,
+    "step_pointer": 13,
     "last_green_tag": "green-sketchflow-1",
-    "head_sha_last_seen": "139b17b",
-    "ci_green_last_seen": "2026-08-15 success (53s)",
+    "head_sha_last_seen": "099e86f",
+    "ci_green_last_seen": "2026-08-17 success (50s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -132,6 +132,13 @@
       "ledger_said": "pointer 11",
       "code_was": "space_saving.py refactored to min-heap+hash index+16 new tests at HEAD, CI green",
       "action": "commit 139b17b (step 11); pointer -> 12"
+    },
+    {
+      "date": "2026-08-17",
+      "event": "step 12 pushed",
+      "ledger_said": "pointer 12",
+      "code_was": "engine.py SketchEngine class+18 tests at HEAD, CI green",
+      "action": "commit 099e86f (step 12); pointer -> 13"
     }
   ],
   "invariants_last_run": {
@@ -207,6 +214,11 @@
       "date": "2026-08-15",
       "step": 11,
       "note": "STEP 11 DONE. SpaceSaving internals upgraded to min-heap (heapq) + hash index for O(log k) add() — same external API, same results, faster at large k. Heap entries are [count, seq, key] lists; seq monotonic for FIFO tie-breaking; _index dict maps key→entry for O(1) lookup. Bump = update count in-place + sift-down; eviction = overwrite root + sift-down. _assert_heap_invariant() verifies heap property + index↔counters consistency. Gate: all step-10 behavioral tests still pass (guarantee, overestimate, eviction, top-k ordering); heap invariant holds after every mutation pattern (inserts, bumps, evictions, weighted, k=1); throughput at k=2000 stays >15% of k=50 (O(log k) scaling confirmed). 16 new tests, 96 total green. Commit 139b17b, CI 53s. Next: step 12, CMS + Space-Saving combined engine."
+    },
+    {
+      "date": "2026-08-17",
+      "step": 12,
+      "note": "STEP 12 DONE. SketchEngine class in engine.py — composes CMS (or CU-CMS) + SpaceSaving into a single-pass analytics engine. Auto-sizes CMS from (ε,δ) via size_cms(). API: add(key), estimate(key) → CMS query, heavy_hitters(n) → Space-Saving top-k keys with CMS-estimated counts (tighter than raw SS counts), summary(). Supports conservative=True for CU-CMS variant. Gate: end-to-end on Zipfian streams, engine top-10 matches exact top-10 across 10 seeds; CMS estimates used (not SS counts); CU mode reduces overestimation; totals in sync across CMS+SS; weighted adds; edge cases (empty, single, k=1); validation. 18 new tests, 114 total green. Commit 099e86f, CI 50s. Phase P3 complete. Next: step 13, benchmark harness v1 (Phase P4)."
     }
   ]
 }
