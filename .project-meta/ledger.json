@@ -17,7 +17,7 @@
     "plan_total_steps": 28,
     "plan_immutable": true,
     "step_pointer": 13,
-    "last_green_tag": "green-sketchflow-1",
+    "last_green_tag": "green-sketchflow-2",
     "head_sha_last_seen": "099e86f",
     "ci_green_last_seen": "2026-08-17 success (50s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
