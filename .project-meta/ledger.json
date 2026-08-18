@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 13,
+    "step_pointer": 14,
     "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "099e86f",
-    "ci_green_last_seen": "2026-08-17 success (50s)",
+    "head_sha_last_seen": "0bd3355",
+    "ci_green_last_seen": "2026-08-18 success (44s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -139,6 +139,13 @@
       "ledger_said": "pointer 12",
       "code_was": "engine.py SketchEngine class+18 tests at HEAD, CI green",
       "action": "commit 099e86f (step 12); pointer -> 13"
+    },
+    {
+      "date": "2026-08-18",
+      "event": "step 13 pushed",
+      "ledger_said": "pointer 13",
+      "code_was": "bench.py benchmark harness+report/results.csv+14 tests at HEAD, CI green",
+      "action": "commit 0bd3355 (step 13); pointer -> 14"
     }
   ],
   "invariants_last_run": {
@@ -219,6 +226,11 @@
       "date": "2026-08-17",
       "step": 12,
       "note": "STEP 12 DONE. SketchEngine class in engine.py — composes CMS (or CU-CMS) + SpaceSaving into a single-pass analytics engine. Auto-sizes CMS from (ε,δ) via size_cms(). API: add(key), estimate(key) → CMS query, heavy_hitters(n) → Space-Saving top-k keys with CMS-estimated counts (tighter than raw SS counts), summary(). Supports conservative=True for CU-CMS variant. Gate: end-to-end on Zipfian streams, engine top-10 matches exact top-10 across 10 seeds; CMS estimates used (not SS counts); CU mode reduces overestimation; totals in sync across CMS+SS; weighted adds; edge cases (empty, single, k=1); validation. 18 new tests, 114 total green. Commit 099e86f, CI 50s. Phase P3 complete. Next: step 13, benchmark harness v1 (Phase P4)."
+    },
+    {
+      "date": "2026-08-18",
+      "step": 13,
+      "note": "STEP 13 DONE. bench.py benchmark harness v1 — runs seeded Zipfian streams through CMS, CU-CMS, Engine, Engine-CU; measures per-key error (mean/max/p99 absolute, mean relative) and memory (bytes_used, baseline_bytes, ratio) against ExactCounter ground truth; writes report/results.csv. CLI: PYTHONPATH=src python -m sketchflow.bench. First run (50k stream, 3 epsilons, 4 variants = 12 rows): CU-CMS halves mean error vs plain CMS; at ε=0.001 sketch memory exceeds dict baseline (honest Python overhead). 14 new tests, 128 total green. Commit 0bd3355, CI 44s. Phase P4 started. Next: step 14, accuracy-vs-memory sweep (vary width/depth, plot error decay via matplotlib)."
     }
   ]
 }
