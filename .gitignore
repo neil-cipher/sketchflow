@@ -5,4 +5,5 @@ data/*.pcap
 data/*.csv
 !data/.gitkeep
 report/*.png
+!report/accuracy_vs_memory.png
 .venv/
