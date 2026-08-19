@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 14,
+    "step_pointer": 15,
     "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "0bd3355",
-    "ci_green_last_seen": "2026-08-18 success (44s)",
+    "head_sha_last_seen": "f1d955c",
+    "ci_green_last_seen": "2026-08-19 success (67s)",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -146,6 +146,13 @@
       "ledger_said": "pointer 13",
       "code_was": "bench.py benchmark harness+report/results.csv+14 tests at HEAD, CI green",
       "action": "commit 0bd3355 (step 13); pointer -> 14"
+    },
+    {
+      "date": "2026-08-19",
+      "event": "step 14 pushed",
+      "ledger_said": "pointer 14",
+      "code_was": "sweep.py+plot.py+report/accuracy_vs_memory.png+15 tests at HEAD, CI green",
+      "action": "commit d12a237 (step 14) + f1d955c (ci fix); pointer -> 15"
     }
   ],
   "invariants_last_run": {
@@ -231,6 +238,11 @@
       "date": "2026-08-18",
       "step": 13,
       "note": "STEP 13 DONE. bench.py benchmark harness v1 — runs seeded Zipfian streams through CMS, CU-CMS, Engine, Engine-CU; measures per-key error (mean/max/p99 absolute, mean relative) and memory (bytes_used, baseline_bytes, ratio) against ExactCounter ground truth; writes report/results.csv. CLI: PYTHONPATH=src python -m sketchflow.bench. First run (50k stream, 3 epsilons, 4 variants = 12 rows): CU-CMS halves mean error vs plain CMS; at ε=0.001 sketch memory exceeds dict baseline (honest Python overhead). 14 new tests, 128 total green. Commit 0bd3355, CI 44s. Phase P4 started. Next: step 14, accuracy-vs-memory sweep (vary width/depth, plot error decay via matplotlib)."
+    },
+    {
+      "date": "2026-08-19",
+      "step": 14,
+      "note": "STEP 14 DONE. sweep.py sweeps ε over two orders of magnitude (0.1→0.0005, 8 points × 4 variants = 32 rows → report/sweep.csv). plot.py reads CSV and generates report/accuracy_vs_memory.png via matplotlib (headless Agg backend): two log-log panels (mean error & max error vs sketch memory), four lines per panel (CMS, CU-CMS, Engine, Engine-CU). Gate: `PYTHONPATH=src python -m sketchflow.plot` regenerates the PNG from CSV in one command. Key finding visualised: CU-CMS halves mean error at every memory point; error decays ~linearly on log-log as ε shrinks. CI fix: added matplotlib to pip install in ci.yml. 15 new tests, 143 total green. Commits d12a237+f1d955c, CI 67s. Next: step 15, HUMAN fetch CIC-IDS-2017 CSV."
     }
   ]
 }
