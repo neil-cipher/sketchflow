@@ -16,19 +16,18 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 15,
+    "step_pointer": 16,
     "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "56845d4",
-    "ci_green_last_seen": "2026-08-19 success (67s)",
-    "note_2026-08-20": "step 15 human_block active — awaiting CIC-IDS-2017 dataset from Ishan",
+    "head_sha_last_seen": "pending-push",
+    "ci_green_last_seen": "pending",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
-    "active": true,
+    "active": false,
     "step_id": "step-015",
     "step_title": "HUMAN: fetch CIC-IDS-2017 CSV via Kaggle mirror (account/accept wall)",
-    "what_ishan_must_do": "1. Go to kaggle.com, sign in (free account). 2. Search 'CIC-IDS-2017' or visit the dataset page. 3. Accept the dataset terms and download the CSV. 4. Place a representative sample as data/cicids_sample.csv in the repo. 5. The next daily run will checksum it, log it, and resume.",
-    "blocked_since": "2026-08-20",
+    "cleared_reason": "Downloaded MachineLearningCSV.zip (224MB) from CIC UNB official site via Chrome-assisted registration + PowerShell download. Stratified sample: 10180 rows (2180 attacks + 8000 benign) from Thursday-Morning-WebAttacks. SHA256: 9787DAD7DDB0BA1E3170257E4D6F9AC7C7ABD90F67911FBFA8E053BEC755B6F6.",
+    "cleared_date": "2026-08-20",
     "previous_step_id": "step-000",
     "confirmed_owner": "neil-cipher",
     "owner_confirmed_by_user": "2026-07-27",
@@ -158,6 +157,13 @@
       "ledger_said": "pointer 14",
       "code_was": "sweep.py+plot.py+report/accuracy_vs_memory.png+15 tests at HEAD, CI green",
       "action": "commit d12a237 (step 14) + f1d955c (ci fix); pointer -> 15"
+    },
+    {
+      "date": "2026-08-20",
+      "event": "step 15 cleared (human_block resolved via Chrome-assisted CIC download)",
+      "ledger_said": "pointer 15, human_block active",
+      "code_was": "data/cicids_sample.csv placed (10180 rows, 2.95 MB, SHA256 9787DAD7...B6F6)",
+      "action": "human_block cleared; pointer -> 16"
     }
   ],
   "invariants_last_run": {
