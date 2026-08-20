@@ -81,3 +81,9 @@
 - gate design note: 15 new tests verify: sweep produces correct structure (all epsilons, all variants); smaller ε → more memory AND less error (the curve's monotonicity); CU beats CMS at every ε; CSV→load round-trip; plot creates non-empty PNG; CLI end-to-end (sweep→CSV→plot→PNG); reproducibility; default SWEEP_EPSILONS span ≥ 100× (two orders of magnitude). 143 total tests green.
 - CI fix: added matplotlib to ci.yml pip install (wasn't needed until this step).
 - Commits d12a237 + f1d955c, CI 67s.
+
+## 2026-08-20 - STEP 15 HUMAN BLOCK (CIC-IDS-2017 dataset fetch)
+- Step 15 is a human_block: Kaggle login + dataset accept wall. data/cicids_sample.csv not present.
+- Per Rule 8: DIE and wait. PROJ-NEEDSYOU flagged on the page. ledger.human_block.active = true.
+- what Ishan must do: sign in to kaggle.com (free), find CIC-IDS-2017, accept terms, download CSV, place a representative sample as data/cicids_sample.csv. The next daily run checksums it, logs provenance, and resumes at step 16.
+- No code changes today — all 143 tests remain green at HEAD 56845d4.
