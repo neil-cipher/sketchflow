@@ -18,8 +18,8 @@
     "plan_immutable": true,
     "step_pointer": 18,
     "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "PENDING",
-    "ci_green_last_seen": "PENDING",
+    "head_sha_last_seen": "9479ee8",
+    "ci_green_last_seen": "9479ee8",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
