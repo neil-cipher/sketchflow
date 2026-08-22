@@ -2,7 +2,9 @@ __pycache__/
 *.pyc
 .pytest_cache/
 data/*.pcap
+!data/mawi_sample.pcap
 data/*.csv
+!data/cicids_sample.csv
 !data/.gitkeep
 report/*.png
 !report/accuracy_vs_memory.png

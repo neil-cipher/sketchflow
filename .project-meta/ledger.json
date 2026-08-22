@@ -16,18 +16,18 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 17,
+    "step_pointer": 18,
     "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "50daf4c",
-    "ci_green_last_seen": "50daf4c",
+    "head_sha_last_seen": "PENDING",
+    "ci_green_last_seen": "PENDING",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
     "active": false,
-    "step_id": "step-015",
-    "step_title": "HUMAN: fetch CIC-IDS-2017 CSV via Kaggle mirror (account/accept wall)",
-    "cleared_reason": "Downloaded MachineLearningCSV.zip (224MB) from CIC UNB official site via Chrome-assisted registration + PowerShell download. Stratified sample: 10180 rows (2180 attacks + 8000 benign) from Thursday-Morning-WebAttacks. SHA256: 9787DAD7DDB0BA1E3170257E4D6F9AC7C7ABD90F67911FBFA8E053BEC755B6F6.",
-    "cleared_date": "2026-08-20",
+    "step_id": "step-017",
+    "step_title": "HUMAN: fetch one MAWI daily pcap (no login; large file)",
+    "cleared_reason": "Streamed samplepoint-B 200601051400.dump.gz from mawi.nezu.wide.ad.jp (no login required). Downloaded only 4MB of the 271MB compressed file using streaming gzip decompression; extracted first 10000 packets (7997 TCP, 1243 UDP, 760 other) as data/mawi_sample.pcap (725477 bytes). dpkt installed via pip. SHA256: 8C4663A6DA8FE4777A1F0353E0F19594EFD483F56F15165B495585B85C45681B.",
+    "cleared_date": "2026-08-22",
     "previous_step_id": "step-000",
     "confirmed_owner": "neil-cipher",
     "owner_confirmed_by_user": "2026-07-27",
@@ -171,6 +171,13 @@
       "ledger_said": "pointer 16",
       "code_was": "cicids.py loader+17 tests at HEAD, CI green",
       "action": "commit 50daf4c (step 16); pointer -> 17"
+    },
+    {
+      "date": "2026-08-22",
+      "event": "step 17 cleared (human_block resolved — MAWI pcap stream-downloaded, no login)",
+      "ledger_said": "pointer 17, human_block inactive (step 15 was last active block)",
+      "code_was": "data/mawi_sample.pcap placed (10000 packets, 725477 bytes, SHA256 8C4663A6...681B)",
+      "action": "human_block cleared for step-017; pointer -> 18; dpkt installed"
     }
   ],
   "invariants_last_run": {
@@ -271,6 +278,11 @@
       "date": "2026-08-21",
       "step": 16,
       "note": "STEP 16 DONE. cicids.py loader: load_cicids() yields 'port:N' stream keys from CIC-IDS-2017 ML-format CSV (Destination Port is the only network-header column — no raw IPs). load_cicids_flows() yields rich dicts (port, label, duration, packet counts). Engine on real data: top-10 ports match exact baseline with k=500 headroom (DNS port 53 dominant at 3667, HTTP 80 at 2990, HTTPS 443 at 1696). CU-CMS reduces overestimation vs plain CMS on real traffic. Never-undercount invariant holds for all 1371 distinct ports. Attack flows target port 80 (web attacks). 17 new tests, 160 total green. Commit 50daf4c, CI 1m14s. Next: step 17 (HUMAN: fetch one MAWI daily pcap)."
+    },
+    {
+      "date": "2026-08-22",
+      "step": 17,
+      "note": "STEP 17 DONE. MAWI pcap sample fetched from WIDE Project backbone archive (mawi.nezu.wide.ad.jp, samplepoint-B, Jan 5 2006, trans-Pacific link 25 Mbps avg). Stream-downloaded 4 MB of 271 MB compressed file, extracted first 10,000 packets → data/mawi_sample.pcap (725 KB). Protocol mix: TCP 80%, UDP 12%, other 8%. IPs scrambled by tcpdpriv (privacy). dpkt 1.9.8 installed for pcap parsing. SHA256: 8C4663A6DA8FE4777A1F0353E0F19594EFD483F56F15165B495585B85C45681B. Human block cleared (no login required). Next: step 18 (MAWI pcap → flow-key stream via dpkt, engine on backbone traffic)."
     }
   ]
 }
