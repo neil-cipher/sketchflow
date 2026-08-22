@@ -31,7 +31,6 @@
     "previous_step_id": "step-000",
     "confirmed_owner": "neil-cipher",
     "owner_confirmed_by_user": "2026-07-27",
-    "cleared_reason": "neil-cipher present in the Surface gh keyring (verified 27-Jul). Login block cleared.",
     "device_findings_2026-07-27": {
       "gh_keyring_accounts": [
         "vir-cipher (active, Ansh)",
@@ -162,7 +161,7 @@
       "date": "2026-08-20",
       "event": "step 15 cleared (human_block resolved via Chrome-assisted CIC download)",
       "ledger_said": "pointer 15, human_block active",
-      "code_was": "data/cicids_sample.csv placed (10180 rows, 2.95 MB, SHA256 9787DAD7...B6F6)",
+      "code_was": "data/cicids_sample.csv placed (10180 rows, 2.95 MB, SHA256 2b22481f...d311)",
       "action": "human_block cleared; pointer -> 16; commit 5f4b7f2; CI green"
     },
     {
@@ -272,7 +271,7 @@
     {
       "date": "2026-08-20",
       "step": 15,
-      "note": "STEP 15 DONE. CIC-IDS-2017 dataset fetched from UNB official site (cicresearch.ca). MachineLearningCSV.zip (224 MB, 8 day-CSVs, 79 CICFlowMeter features + Label). Stratified sample from Thursday-Morning-WebAttacks: 10,180 rows (2,180 attacks — Brute Force 1507, XSS 652, SQL Injection 21 — + 8,000 random benign, seed 42) → data/cicids_sample.csv (2.95 MB). SHA256: 9787DAD7DDB0BA1E3170257E4D6F9AC7C7ABD90F67911FBFA8E053BEC755B6F6. NOTE: MachineLearningCSV format has NO raw IPs (Source IP / Dest IP / Protocol absent) — Destination Port is the only network-header column; step 16 loader must adapt 5-tuple flow keys accordingly. Human block cleared. Commit 5f4b7f2, CI green 74s. Next: step 16, CIC-IDS loader → parse flow keys from real intrusion-detection data."
+      "note": "STEP 15 DONE. CIC-IDS-2017 dataset fetched from UNB official site (cicresearch.ca). MachineLearningCSV.zip (224 MB, 8 day-CSVs, 79 CICFlowMeter features + Label). Stratified sample from Thursday-Morning-WebAttacks: 10,180 rows (2,180 attacks — Brute Force 1507, XSS 652, SQL Injection 21 — + 8,000 random benign, seed 42) → data/cicids_sample.csv (2.94 MB). SHA256: 2b22481f8f5bbd6f9f0f36f1bbc99c738c42d9033dfe63f2a3205a2f6eedd311. NOTE: MachineLearningCSV format has NO raw IPs (Source IP / Dest IP / Protocol absent) — Destination Port is the only network-header column; step 16 loader must adapt 5-tuple flow keys accordingly. Human block cleared. Commit 5f4b7f2, CI green 74s. Next: step 16, CIC-IDS loader → parse flow keys from real intrusion-detection data."
     },
     {
       "date": "2026-08-21",

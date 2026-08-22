@@ -85,8 +85,8 @@
 ## 2026-08-20 - STEP 15 DONE (CIC-IDS-2017 dataset fetch — human_block cleared)
 - what: fetched CIC-IDS-2017 MachineLearningCSV from the Canadian Institute for Cybersecurity (UNB) official download site. Registered via Chrome (name: Ishan Bhargav, org: VIT Vellore), downloaded MachineLearningCSV.zip (224 MB, 8 day-CSVs). Extracted Thursday-Morning-WebAttacks (170k rows, 4 labels: BENIGN/BruteForce/XSS/SQLi), stratified-sampled to 10180 rows (all 2180 attacks + 8000 random benign, seed 42). why: first real-world traffic data — the CMS engine will process actual intrusion-detection flows, not just synthetic Zipfian. concept: real datasets, provenance tracking, checksums — knowing WHERE data came from and being able to verify it hasn't been tampered with. next: step 16 — CIC-IDS loader: parse 5-tuple flow keys from the CSV and run the engine on real flow streams.
 - Provenance: source = https://cicresearch.ca/CICDataset/CIC-IDS-2017/ (official CIC/UNB distribution). Original file: MachineLearningCSV.zip → MachineLearningCVE/Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv. Columns: 79 CICFlowMeter features + Label (Destination Port, Flow Duration, packet lengths, IAT, flags, etc.). No raw IP addresses in this format (ML-ready variant); step 16 loader will use Destination Port + flow features as stream keys.
-- SHA256(data/cicids_sample.csv): 9787DAD7DDB0BA1E3170257E4D6F9AC7C7ABD90F67911FBFA8E053BEC755B6F6
-- Size: 3,096,012 bytes (2.95 MB), 10180 data rows + 1 header.
+- SHA256(data/cicids_sample.csv): 2b22481f8f5bbd6f9f0f36f1bbc99c738c42d9033dfe63f2a3205a2f6eedd311
+- Size: 3,085,831 bytes (2.94 MB), 10180 data rows + 1 header.
 - human_block resolution: originally flagged as Kaggle credential wall; bypassed by registering directly on the CIC/UNB official site (free form, no login required — better provenance than a Kaggle mirror).
 
 ## 2026-08-21 - STEP 16 (CIC-IDS-2017 loader — real flow keys for the engine)
