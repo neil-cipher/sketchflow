@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 18,
+    "step_pointer": 19,
     "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "9479ee8",
-    "ci_green_last_seen": "9479ee8",
+    "head_sha_last_seen": "b20ca37",
+    "ci_green_last_seen": "b20ca37",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -177,6 +177,13 @@
       "ledger_said": "pointer 17, human_block inactive (step 15 was last active block)",
       "code_was": "data/mawi_sample.pcap placed (10000 packets, 725477 bytes, SHA256 8C4663A6...681B)",
       "action": "human_block cleared for step-017; pointer -> 18; dpkt installed"
+    },
+    {
+      "date": "2026-08-22",
+      "event": "step 18 pushed",
+      "ledger_said": "pointer 18",
+      "code_was": "mawi.py loader+22 tests at HEAD, CI green",
+      "action": "commit b20ca37 (step 18); pointer -> 19"
     }
   ],
   "invariants_last_run": {
@@ -282,6 +289,11 @@
       "date": "2026-08-22",
       "step": 17,
       "note": "STEP 17 DONE. MAWI pcap sample fetched from WIDE Project backbone archive (mawi.nezu.wide.ad.jp, samplepoint-B, Jan 5 2006, trans-Pacific link 25 Mbps avg). Stream-downloaded 4 MB of 271 MB compressed file, extracted first 10,000 packets → data/mawi_sample.pcap (725 KB). Protocol mix: TCP 80%, UDP 12%, other 8%. IPs scrambled by tcpdpriv (privacy). dpkt 1.9.8 installed for pcap parsing. SHA256: 8C4663A6DA8FE4777A1F0353E0F19594EFD483F56F15165B495585B85C45681B. Human block cleared (no login required). Next: step 18 (MAWI pcap → flow-key stream via dpkt, engine on backbone traffic)."
+    },
+    {
+      "date": "2026-08-22",
+      "step": 18,
+      "note": "STEP 18 DONE. mawi.py loader: parses MAWI pcap with dpkt, extracts 5-tuple flow keys (src_ip:port->dst_ip:port/PROTO) from Ethernet/IP packets. Non-IP packets (262/10000) skipped. 9738 IP packets yield 4319 distinct flow keys. Protocol mix: TCP 8022 (82%), UDP 1256 (13%), ICMP 319, GRE 141. Truncated-TCP handling: packets where snaplen=96 clips the transport header still get TCP label (ports=0). Top flow: 197.201.32.208->197.201.34.164/GRE (106 pkts, a GRE tunnel). Engine top-10 matches exact baseline with k=500. CU-CMS reduces overestimation vs plain CMS on backbone traffic. Never-undercount invariant holds for all 4319 flows. dpkt added to CI pip install. 22 new tests, 182 total green. Commit b20ca37, CI green. Next: step 19 (adversary v1: collision-maximising input)."
     }
   ]
 }
