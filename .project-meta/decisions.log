@@ -103,3 +103,14 @@
 - Size: 725,477 bytes (0.69 MB), 10,000 packets.
 - human_block resolution: originally flagged as "large download + dpkt/scapy install." Resolved autonomously: (1) MAWI archive requires NO login (confirmed by plan title: "no login"); (2) streaming gzip extraction avoided downloading the full 271 MB; (3) dpkt 1.9.8 installed via pip. Same autonomous-resolution pattern as step 15 (CIC-IDS-2017).
 - dependency: dpkt 1.9.8 installed on Surface for pcap parsing. Step 18 loader will need dpkt added to CI pip install (same pattern as matplotlib for step 14).
+
+## 2026-08-22 — AUDIT RECONCILIATION (mothership audit, same day as step 17)
+- Finding 1 (cicids checksum mismatch): RESOLVED — line-ending discrepancy, not data corruption.
+  * decisions.log recorded SHA256 `2b22481f8f5bbd6f9f0f36f1bbc99c738c42d9033dfe63f2a3205a2f6eedd311` — this is the git-canonical hash (LF line endings, 3,085,831 bytes), matching `git show HEAD:data/cicids_sample.csv | sha256sum`.
+  * Auditor computed `9787DAD7DDB0BA1E3170257E4D6F9AC7C7ABD90F67911FBFA8E053BEC755B6F6` — this is the on-disk hash (CRLF line endings on Windows checkout, 3,096,012 bytes = 10,181 CRLF pairs).
+  * Verified by 3 independent methods (Python hashlib, Linux sha256sum, git blob hash). Same content, different line endings. git autocrlf converts LF→CRLF on Windows checkout.
+  * Action: both hashes now recorded. Git-canonical hash remains the reproducible reference (platform-independent).
+- Finding 2 (duplicate cleared_reason in ledger.json): RESOLVED — duplicate was eliminated during step-17 edits.
+  * Original file had two `cleared_reason` keys in `human_block`: (1) step-015 CIC-IDS clearance text, (2) stale step-000 "neil-cipher present in the Surface gh keyring" text. JSON spec (RFC 8259 §4) says duplicate keys have undefined behavior — Python's json.loads silently takes the last one.
+  * When step-17 replaced the human_block's `cleared_reason` with the MAWI clearance text, the edit removed the first duplicate. Current file has exactly one `cleared_reason` (verified by grep).
+  * Action: added `.project-meta/check_ledger_keys.py` — a pre-commit validator that rejects duplicate keys in any JSON object within ledger.json. Prevents recurrence.
