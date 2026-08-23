@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 19,
+    "step_pointer": 20,
     "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "b20ca37",
-    "ci_green_last_seen": "b20ca37",
+    "head_sha_last_seen": "3352e4a",
+    "ci_green_last_seen": "3352e4a",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -184,6 +184,13 @@
       "ledger_said": "pointer 18",
       "code_was": "mawi.py loader+22 tests at HEAD, CI green",
       "action": "commit b20ca37 (step 18); pointer -> 19"
+    },
+    {
+      "date": "2026-08-23",
+      "event": "step 19 pushed",
+      "ledger_said": "pointer 19",
+      "code_was": "adversary.py + 9 tests at HEAD, CI green",
+      "action": "commit 3352e4a (step 19); pointer -> 20; Phase P5 (Adversarial stress) started"
     }
   ],
   "invariants_last_run": {
@@ -294,6 +301,11 @@
       "date": "2026-08-22",
       "step": 18,
       "note": "STEP 18 DONE. mawi.py loader: parses MAWI pcap with dpkt, extracts 5-tuple flow keys (src_ip:port->dst_ip:port/PROTO) from Ethernet/IP packets. Non-IP packets (262/10000) skipped. 9738 IP packets yield 4319 distinct flow keys. Protocol mix: TCP 8022 (82%), UDP 1256 (13%), ICMP 319, GRE 141. Truncated-TCP handling: packets where snaplen=96 clips the transport header still get TCP label (ports=0). Top flow: 197.201.32.208->197.201.34.164/GRE (106 pkts, a GRE tunnel). Engine top-10 matches exact baseline with k=500. CU-CMS reduces overestimation vs plain CMS on backbone traffic. Never-undercount invariant holds for all 4319 flows. dpkt added to CI pip install. 22 new tests, 182 total green. Commit b20ca37, CI green. Next: step 19 (adversary v1: collision-maximising input)."
+    },
+    {
+      "date": "2026-08-23",
+      "step": 19,
+      "note": "STEP 19 DONE. adversary.py — Phase P5 opens. Threat model: known-seed/white-box attacker (Crosby & Wallach, USENIX Security 2003 hash-flooding model) who knows a CMS's exact (width,depth,seed) brute-force-searches for keys sharing the SAME bucket in EVERY row ('full-row collision group'); find_colliding_group() does this search (candidates f'{namespace}-{i}', deterministic/reproducible). adversarial_stream() builds N disjoint collision groups and replays each key; random_control_stream() is the benign comparison at identical size. Gate result across 25 seeds on a deliberately small demo sketch (width=16, depth=3): adversarial stream beat the benign control's mean overestimation error on 25/25 seeds (100%); mean adversarial error 81.60 vs mean control error 11.33 — a 7.2x ratio. Flip-side check: against a production-sized sketch (size_cms(0.01,0.05) = width 272, depth 3), the same search fails within 5,000 trials — confirming the attack needs a small/known-seed sketch, not a break of correctly-sized deployments. 9 new tests, 191 total green. Commit 3352e4a, CI green 59s. Next: step 20 (guarantee-violation meter: empirical P(error > epsilon*N) vs promised delta)."
     }
   ]
 }
