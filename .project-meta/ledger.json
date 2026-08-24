@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 20,
+    "step_pointer": 21,
     "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "3352e4a",
-    "ci_green_last_seen": "3352e4a",
+    "head_sha_last_seen": "e7c3a28",
+    "ci_green_last_seen": "e7c3a28",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -191,6 +191,13 @@
       "ledger_said": "pointer 19",
       "code_was": "adversary.py + 9 tests at HEAD, CI green",
       "action": "commit 3352e4a (step 19); pointer -> 20; Phase P5 (Adversarial stress) started"
+    },
+    {
+      "date": "2026-08-24",
+      "event": "step 20 pushed",
+      "ledger_said": "pointer 20",
+      "code_was": "guarantee_meter.py + 6 tests at HEAD, CI green",
+      "action": "commit e7c3a28 (step 20); pointer -> 21"
     }
   ],
   "invariants_last_run": {
@@ -306,6 +313,11 @@
       "date": "2026-08-23",
       "step": 19,
       "note": "STEP 19 DONE. adversary.py — Phase P5 opens. Threat model: known-seed/white-box attacker (Crosby & Wallach, USENIX Security 2003 hash-flooding model) who knows a CMS's exact (width,depth,seed) brute-force-searches for keys sharing the SAME bucket in EVERY row ('full-row collision group'); find_colliding_group() does this search (candidates f'{namespace}-{i}', deterministic/reproducible). adversarial_stream() builds N disjoint collision groups and replays each key; random_control_stream() is the benign comparison at identical size. Gate result across 25 seeds on a deliberately small demo sketch (width=16, depth=3): adversarial stream beat the benign control's mean overestimation error on 25/25 seeds (100%); mean adversarial error 81.60 vs mean control error 11.33 — a 7.2x ratio. Flip-side check: against a production-sized sketch (size_cms(0.01,0.05) = width 272, depth 3), the same search fails within 5,000 trials — confirming the attack needs a small/known-seed sketch, not a break of correctly-sized deployments. 9 new tests, 191 total green. Commit 3352e4a, CI green 59s. Next: step 20 (guarantee-violation meter: empirical P(error > epsilon*N) vs promised delta)."
+    },
+    {
+      "date": "2026-08-24",
+      "step": 20,
+      "note": "STEP 20 DONE. guarantee_meter.py — turns the eps/delta check into a reusable meter: violating_keys()/violation_rate() flag any key whose CMS estimate exceeds true+eps*N; benign_violation_study() reruns step 6's 300-hash-seed check as a general utility; adversarial_violation_study() applies the identical meter to a step-19 collision stream. Benign result: at eps=0.01, delta=0.05, 300 trials, 10k Zipfian stream — all 10 top-heavy-hitter keys measured 0.0 empirical violation rate (well inside the delta=0.05 promise; margin cutoff 3*delta=0.15 per step-6's established sampling-noise allowance). Adversarial result: on the step-19 demo sketch (width=16,depth=3,seed=42, 5 groups x 5 keys x 20 events, eps=0.02) the collision-maximising stream hit 100% violation rate (1.0) vs 48% (0.48) for the size-matched benign control — same meter, decisively higher failure rate once the attacker knows the seed. 6 new tests, 197 total green. Commit e7c3a28, CI green 1m0s. Next: step 21 (CU vs plain CMS under adversarial load — does conservative update survive the attack; report/adversarial.csv)."
     }
   ]
 }
