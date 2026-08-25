@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 21,
-    "last_green_tag": "green-sketchflow-2",
-    "head_sha_last_seen": "e7c3a28",
-    "ci_green_last_seen": "e7c3a28",
+    "step_pointer": 22,
+    "last_green_tag": "green-sketchflow-3",
+    "head_sha_last_seen": "d4ffde6",
+    "ci_green_last_seen": "d4ffde6",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -198,6 +198,13 @@
       "ledger_said": "pointer 20",
       "code_was": "guarantee_meter.py + 6 tests at HEAD, CI green",
       "action": "commit e7c3a28 (step 20); pointer -> 21"
+    },
+    {
+      "date": "2026-08-25",
+      "event": "step 21 pushed (reconciled from orphaned working-tree build)",
+      "ledger_said": "pointer 21",
+      "code_was": "adversarial_study.py + 7 tests + report/adversarial.csv complete-but-uncommitted in working tree (prior run died before commit, same pattern as 12-Aug step 8); all 204 tests verified green locally, CI green",
+      "action": "commit d4ffde6 (step 21); tag green-sketchflow-3 (9 green steps since tag 2); pointer -> 22"
     }
   ],
   "invariants_last_run": {
@@ -318,6 +325,11 @@
       "date": "2026-08-24",
       "step": 20,
       "note": "STEP 20 DONE. guarantee_meter.py — turns the eps/delta check into a reusable meter: violating_keys()/violation_rate() flag any key whose CMS estimate exceeds true+eps*N; benign_violation_study() reruns step 6's 300-hash-seed check as a general utility; adversarial_violation_study() applies the identical meter to a step-19 collision stream. Benign result: at eps=0.01, delta=0.05, 300 trials, 10k Zipfian stream — all 10 top-heavy-hitter keys measured 0.0 empirical violation rate (well inside the delta=0.05 promise; margin cutoff 3*delta=0.15 per step-6's established sampling-noise allowance). Adversarial result: on the step-19 demo sketch (width=16,depth=3,seed=42, 5 groups x 5 keys x 20 events, eps=0.02) the collision-maximising stream hit 100% violation rate (1.0) vs 48% (0.48) for the size-matched benign control — same meter, decisively higher failure rate once the attacker knows the seed. 6 new tests, 197 total green. Commit e7c3a28, CI green 1m0s. Next: step 21 (CU vs plain CMS under adversarial load — does conservative update survive the attack; report/adversarial.csv)."
+    },
+    {
+      "date": "2026-08-25",
+      "step": 21,
+      "note": "STEP 21 DONE. adversarial_study.py — runs {plain CMS, CU-CMS} x {step-19 adversarial stream, size-matched benign control} across 10 hash seeds at identical (width,depth,seed) memory; measures each cell with the step-20 meter; ships report/adversarial.csv (40 rows, regenerable via PYTHONPATH=src python -m sketchflow.adversarial_study). CORE FINDING: conservative update does NOT survive the attack — against full-row collision groups CU degenerates into plain CMS (every group member shares the same bucket in every row, so CU's add() finds min == all group cells and bumps them in lock-step; no cleaner row left to trust). Numbers (demo sketch 16x3, eps=0.02): adversarial — plain violation 1.000 / mean_error 82.00, CU 1.000 / 80.04 (97.6% of plain, no rescue). Benign control — plain 0.464 / 11.04, CU 0.000 / 2.00 (step 9's edge intact). Robustness comes from sizing + secret seed, not CU. Reconcile note: code found complete-but-uncommitted in working tree (prior run died pre-commit, 12-Aug pattern); all 204 tests verified green locally then committed. 7 new tests, 204 total green. Commit d4ffde6, CI green 1m40s. Tag green-sketchflow-3 cut. Next: step 22 (adversary on real traces: replay MAWI/CIC with heavy-hitter amplification, report/real_adversarial.png)."
     }
   ]
 }
