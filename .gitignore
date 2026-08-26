@@ -8,4 +8,5 @@ data/*.csv
 !data/.gitkeep
 report/*.png
 !report/accuracy_vs_memory.png
+!report/real_adversarial.png
 .venv/
