@@ -16,10 +16,10 @@
     "patent_angle": "NO \u2014 algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 22,
+    "step_pointer": 23,
     "last_green_tag": "green-sketchflow-3",
-    "head_sha_last_seen": "d4ffde6",
-    "ci_green_last_seen": "d4ffde6",
+    "head_sha_last_seen": "c175244",
+    "ci_green_last_seen": "c175244",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -205,6 +205,13 @@
       "ledger_said": "pointer 21",
       "code_was": "adversarial_study.py + 7 tests + report/adversarial.csv complete-but-uncommitted in working tree (prior run died before commit, same pattern as 12-Aug step 8); all 204 tests verified green locally, CI green",
       "action": "commit d4ffde6 (step 21); tag green-sketchflow-3 (9 green steps since tag 2); pointer -> 22"
+    },
+    {
+      "date": "2026-08-26",
+      "event": "step 22 pushed",
+      "ledger_said": "pointer 22",
+      "code_was": "real_adversary.py + real_plot.py + 16 tests + report/real_adversarial.{csv,png} at HEAD, CI green",
+      "action": "commit c175244 (step 22); pointer -> 23; Phase P5 (Adversarial stress) COMPLETE"
     }
   ],
   "invariants_last_run": {
@@ -330,6 +337,11 @@
       "date": "2026-08-25",
       "step": 21,
       "note": "STEP 21 DONE. adversarial_study.py — runs {plain CMS, CU-CMS} x {step-19 adversarial stream, size-matched benign control} across 10 hash seeds at identical (width,depth,seed) memory; measures each cell with the step-20 meter; ships report/adversarial.csv (40 rows, regenerable via PYTHONPATH=src python -m sketchflow.adversarial_study). CORE FINDING: conservative update does NOT survive the attack — against full-row collision groups CU degenerates into plain CMS (every group member shares the same bucket in every row, so CU's add() finds min == all group cells and bumps them in lock-step; no cleaner row left to trust). Numbers (demo sketch 16x3, eps=0.02): adversarial — plain violation 1.000 / mean_error 82.00, CU 1.000 / 80.04 (97.6% of plain, no rescue). Benign control — plain 0.464 / 11.04, CU 0.000 / 2.00 (step 9's edge intact). Robustness comes from sizing + secret seed, not CU. Reconcile note: code found complete-but-uncommitted in working tree (prior run died pre-commit, 12-Aug pattern); all 204 tests verified green locally then committed. 7 new tests, 204 total green. Commit d4ffde6, CI green 1m40s. Tag green-sketchflow-3 cut. Next: step 22 (adversary on real traces: replay MAWI/CIC with heavy-hitter amplification, report/real_adversarial.png)."
+    },
+    {
+      "date": "2026-08-26",
+      "step": 22,
+      "note": "STEP 22 DONE. real_adversary.py + real_plot.py — brings adversarial stress to the two REAL traces (MAWI backbone pcap, CIC-IDS-2017 flows) under a weaker/realistic threat model than the known-seed collision attacker of steps 19-21: heavy-hitter amplification (volumetric DDoS pattern). amplify_stream() multiplies the top-10 heavy flows by a factor; the attacker does NOT know the seed and cannot pick colliding keys — only floods flows that are already heavy. Sweeps factor {1,2,5,10,20,50} x provisioning {eps=0.01 sized w=272, eps=0.1 under-provisioned w=28}. Gate artifact report/real_adversarial.png (+ .csv, 24 rows), regenerable via PYTHONPATH=src python -m sketchflow.real_plot. CORE FINDING — 'which promise breaks': a well-sized CMS is essentially immune to amplification on real traffic (MAWI mean err 22.2->23.0 at x50; CIC dead flat 3.34 — amplified top ports sit in uncontested buckets; provisioned violation ~0). Under-provisioning breaks the operator's FIXED baseline promise eps*N0: MAWI 0 -> 3.4% of keys, CIC 0.07% -> 2.4% by x50; mean err climbs (CIC 49.6->163). The SELF-SCALING textbook bound eps*N (N=live length) holds everywhere (theorem violation <=0.0009 max), because it loosens as fast as N grows — volume alone doesn't break the theorem. Invariant proven per row: violation_rate_theorem <= violation_rate_provisioned (since N>=N0 => eps*N>=eps*N0). Robustness = provision for peak / re-size under load, not the theorem. 16 new tests (incl. real-trace integration), 220 total green. Commit c175244, CI green 2m3s. Phase P5 (Adversarial stress — the standout) COMPLETE. Next: step 23 (Phase P6 — Empirical study report v1 in Markdown: method, curves, adversarial findings, honest limits, every claim cited)."
     }
   ]
 }
