@@ -10,3 +10,17 @@ jobs:
           python-version: "3.12"
       - run: pip install pytest matplotlib dpkt
       - run: pytest -q
+  reproduce:
+    # Step 24 gate: wipe every generated artifact, regenerate all of them
+    # from seeds with one command, then prove the regenerated data still
+    # backs every claim in the report by re-running the full test suite.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest matplotlib dpkt
+      - run: make clean
+      - run: make reproduce
+      - run: pytest -q

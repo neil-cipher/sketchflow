@@ -97,6 +97,14 @@ Two distinct promises are measured per row: the **theorem bound** ε·N (N = liv
 
 ## 7. Reproducing everything
 
+One command regenerates every CSV and figure in `report/` from seeds (CI does exactly this, clean from scratch, on every push):
+
+```
+make reproduce
+```
+
+Or step by step:
+
 ```
 git clone https://github.com/neil-cipher/sketchflow && cd sketchflow
 pip install pytest matplotlib dpkt
@@ -107,7 +115,7 @@ PYTHONPATH=src python -m sketchflow.adversarial_study   # report/adversarial.csv
 PYTHONPATH=src python -m sketchflow.real_plot           # report/real_adversarial.csv + .png
 ```
 
-All randomness is seeded; the CSVs committed in `report/` are byte-reproducible from the commands above.
+All randomness is seeded, so every error and violation column is byte-reproducible from the commands above. The memory columns (`sketch_bytes`, `baseline_bytes`) come from `sys.getsizeof` and can shift by a few percent across Python versions; the findings they back (e.g. the memory crossover at small epsilon) are inequalities, not exact byte counts, and hold regardless.
 
 ## References
 
