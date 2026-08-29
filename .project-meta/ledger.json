@@ -16,10 +16,10 @@
     "patent_angle": "NO — algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 25,
+    "step_pointer": 26,
     "last_green_tag": "green-sketchflow-3",
-    "head_sha_last_seen": "e84b18d",
-    "ci_green_last_seen": "e84b18d",
+    "head_sha_last_seen": "83dfd01",
+    "ci_green_last_seen": "83dfd01",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -226,6 +226,13 @@
       "ledger_said": "pointer 24",
       "code_was": "Makefile reproduce target + ci.yml reproduce job + 7 tests at HEAD, CI green (both jobs); sweep.csv memory columns refreshed (env-stale getsizeof values, code wins)",
       "action": "commit e84b18d (step 24); pointer -> 25"
+    },
+    {
+      "date": "2026-08-29",
+      "event": "step 25 pushed",
+      "ledger_said": "pointer 25",
+      "code_was": "README.md polished (hook + results-in-four-numbers table + verify-in-5-min + pedagogy index + literature) + tests/test_step25_readme.py (9 gates: sections, verify commands, internal-link resolution, drift-proof headline numbers vs CSVs) at HEAD, CI green (both jobs)",
+      "action": "commit 83dfd01 (step 25); pointer -> 26"
     }
   ],
   "invariants_last_run": {
@@ -366,6 +373,11 @@
       "date": "2026-08-28",
       "step": 24,
       "note": "STEP 24 DONE. Makefile `reproduce` target runs every artifact generator in dependency order (bench->results.csv, sweep->sweep.csv, plot->accuracy_vs_memory.png, adversarial_study->adversarial.csv, real_plot->real_adversarial.{csv,png}) with PYTHONPATH=src; ci.yml gains a second `reproduce` job: make clean (wipe every generated CSV/PNG) -> make reproduce -> full pytest, so every push proves the whole empirical study regenerates from seeds on a bare checkout and the regenerated data still passes the step-23 report-consistency gates. Honest finding: regeneration surfaced env-stale memory columns in sweep.csv (baseline_bytes 421565 from an older Python vs 352277 on py3.14 - sys.getsizeof drift); code wins - committed the regenerated CSV and reworded report section 7: error/violation columns byte-reproducible, memory columns environment-dependent, findings are inequalities and hold regardless. 7 new tests (reproduce covers every generator, generator-before-plotter ordering, clean wipes artifacts, CI clean-before-reproduce + pytest-after-reproduce, report documents make reproduce). 237 total green. Commit e84b18d, CI green 2m56s (both jobs). Next: step 25 (README polish: hook, citations, results summary, verify-me-in-5-min)."
+    },
+    {
+      "date": "2026-08-29",
+      "step": 25,
+      "note": "STEP 25 DONE. README.md rebuilt as the reviewer-facing landing page: keeps the 'a CMS you can break' hook + no-novelty framing, adds a CI badge, a 'Results in four numbers' table (CU halves mean error 24.46->12.56 at eps=0.01; memory crossover ratio 0.14 at eps=0.01 vs 1.39 at eps=0.001; CU is NOT a defense - violation 1.0 under white-box collision attack; well-sized CMS immune to x50 volumetric amplification on MAWI, theorem violation <=0.0009), an embedded accuracy-vs-memory figure, a concrete 'verify me in 5 minutes' block (clone -> pip -> pytest -> make reproduce, with expected outcome), a per-step PEDAGOGY INDEX table (one concept per build step 0-25, grouped by phase, standout phase flagged), and a literature line linking the report's References anchor. Every headline number is a live link to its CSV/PNG. Gate: tests/test_step25_readme.py (9 tests) checks required sections, verify-commands, that EVERY internal markdown link resolves to a real repo file, and - drift-proof like step 23 - recomputes the headline numbers FROM report/results.csv + report/adversarial.csv and asserts the README cites the matching values (README cannot drift from the data). No source touched; docs+test only. 246 total green. Commit 83dfd01, CI green 2m31s (both jobs: test + clean-from-scratch reproduce). Next: step 26 (per plan.json)."
     }
   ]
 }
