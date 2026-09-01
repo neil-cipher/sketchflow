@@ -16,10 +16,10 @@
     "patent_angle": "NO — algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 26,
-    "last_green_tag": "green-sketchflow-3",
-    "head_sha_last_seen": "83dfd01",
-    "ci_green_last_seen": "83dfd01",
+    "step_pointer": 27,
+    "last_green_tag": "green-sketchflow-final",
+    "head_sha_last_seen": "27b53e4",
+    "ci_green_last_seen": "27b53e4",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
@@ -233,6 +233,13 @@
       "ledger_said": "pointer 25",
       "code_was": "README.md polished (hook + results-in-four-numbers table + verify-in-5-min + pedagogy index + literature) + tests/test_step25_readme.py (9 gates: sections, verify commands, internal-link resolution, drift-proof headline numbers vs CSVs) at HEAD, CI green (both jobs)",
       "action": "commit 83dfd01 (step 25); pointer -> 26"
+    },
+    {
+      "date": "2026-09-01",
+      "event": "step 26 pushed + FINAL green checkpoint tag",
+      "ledger_said": "pointer 26",
+      "code_was": "tests/test_step26_ship.py (15 tests: 9-test whole-stack final invariant sweep + 6 ship-artifact gates) + src/sketchflow/covbadge.py + .coveragerc (fail_under=90) + report/coverage.svg + report/coverage_summary.json + Makefile `coverage` target + ci.yml `coverage` job at HEAD; 261 tests green; CI green all THREE jobs (test + reproduce + coverage)",
+      "action": "commit 27b53e4 (step 26); tag green-sketchflow-final cut (final core checkpoint; step 27 is the OPTIONAL stretch); pointer -> 27; NO drift — code+CI back the ledger"
     }
   ],
   "invariants_last_run": {
@@ -378,6 +385,11 @@
       "date": "2026-08-29",
       "step": 25,
       "note": "STEP 25 DONE. README.md rebuilt as the reviewer-facing landing page: keeps the 'a CMS you can break' hook + no-novelty framing, adds a CI badge, a 'Results in four numbers' table (CU halves mean error 24.46->12.56 at eps=0.01; memory crossover ratio 0.14 at eps=0.01 vs 1.39 at eps=0.001; CU is NOT a defense - violation 1.0 under white-box collision attack; well-sized CMS immune to x50 volumetric amplification on MAWI, theorem violation <=0.0009), an embedded accuracy-vs-memory figure, a concrete 'verify me in 5 minutes' block (clone -> pip -> pytest -> make reproduce, with expected outcome), a per-step PEDAGOGY INDEX table (one concept per build step 0-25, grouped by phase, standout phase flagged), and a literature line linking the report's References anchor. Every headline number is a live link to its CSV/PNG. Gate: tests/test_step25_readme.py (9 tests) checks required sections, verify-commands, that EVERY internal markdown link resolves to a real repo file, and - drift-proof like step 23 - recomputes the headline numbers FROM report/results.csv + report/adversarial.csv and asserts the README cites the matching values (README cannot drift from the data). No source touched; docs+test only. 246 total green. Commit 83dfd01, CI green 2m31s (both jobs: test + clean-from-scratch reproduce). Next: step 26 (per plan.json)."
+    },
+    {
+      "date": "2026-09-01",
+      "step": 26,
+      "note": "STEP 26 DONE. The green checkpoint — Phase P6 closes the core. THREE deliverables. (1) FINAL INVARIANT SWEEP: tests/test_step26_ship.py::TestFinalInvariantSweep re-proves every promise the whole stack rests on, end-to-end in ONE file at HEAD (CMS never undercounts; benign eps/delta promise holds within the step-20 3*delta margin; CU <= plain yet >= true; serialize round-trip lossless with 24+d*w*8 blob; inner_product never undercounts self-join L2^2; Space-Saving guarantees every key above N/k; engine surfaces the true top-10; the known-seed collision adversary beats the benign control while a correctly-sized sketch resists) — the individual step tests each guard one layer, this proves the layers still cohere together. (2) COVERAGE, secret-free: src/sketchflow/covbadge.py generates a static shields-style report/coverage.svg + report/coverage_summary.json from a real coverage.py measurement (93% line coverage on py3.10; NO Codecov/upload token — the project ships no secrets); .coveragerc holds the single-source-of-truth floor fail_under=90; a new ci.yml `coverage` job runs `coverage run --source=sketchflow -m pytest` + `coverage report -m --fail-under=90`, so the live number provably never drops below 90% on any push (coverage is CPython-version dependent, so the honest claim is the inequality, exactly like step 24's memory columns). TestShipArtifacts gates that the badge == its data file == the .coveragerc floor, CI enforces that same floor, the Makefile has the `coverage` target, and the README surfaces the badge. (3) TAG green-sketchflow-final cut on the checkpoint (step 27 is the clearly-OPTIONAL HyperLogLog stretch). 261 total green. Commit 27b53e4, CI green all THREE jobs (test + reproduce + coverage). Commands: PYTHONPATH=src pytest -q; make coverage; git tag green-sketchflow-final; gh run list. Next: step 27 (OPTIONAL P7 stretch — HyperLogLog cardinality, only now that the core is fully green + tagged)."
     }
   ]
 }
