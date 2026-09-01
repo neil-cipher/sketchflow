@@ -24,3 +24,17 @@ jobs:
       - run: make clean
       - run: make reproduce
       - run: pytest -q
+  coverage:
+    # Step 26 gate: measure line coverage and enforce the floor declared
+    # in .coveragerc ([report] fail_under = 90). Fully in-repo — no upload
+    # token and no third-party coverage service (the project ships no
+    # secrets); the committed badge (report/coverage.svg) is a static SVG.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest matplotlib dpkt coverage
+      - run: coverage run --source=sketchflow -m pytest -q
+      - run: coverage report -m --fail-under=90

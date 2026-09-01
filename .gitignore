@@ -9,4 +9,9 @@ data/*.csv
 report/*.png
 !report/accuracy_vs_memory.png
 !report/real_adversarial.png
+# coverage (step 26): the data dumps are transient; the badge SVG and its
+# tiny summary data file ARE committed (see report/coverage.svg).
+.coverage
+.coverage.*
+report/coverage.json
 .venv/

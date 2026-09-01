@@ -1,0 +1,7 @@
+{
+  "line_coverage_percent": 93,
+  "floor": 90,
+  "measured_python": "3.10.12",
+  "tool": "coverage.py",
+  "note": "Static, secret-free badge. Coverage is CPython-version dependent; this is a measured snapshot. CI enforces the floor with `coverage report --fail-under` on every push, so the live number never drops below `floor`."
+}

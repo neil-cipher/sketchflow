@@ -1,0 +1,19 @@
+# Step 26 — coverage configuration.
+# The single source of truth for the enforced coverage floor: CI runs
+# `coverage report --fail-under` (see .github/workflows/ci.yml) and
+# sketchflow.covbadge reads this same number, so the badge, the test
+# gate, and CI can never disagree about the floor.
+[run]
+source = sketchflow
+branch = false
+
+[report]
+# Line coverage must never drop below this on any push. Measured
+# coverage sits comfortably above it (see report/coverage_summary.json);
+# the floor leaves headroom for CPython-version differences.
+fail_under = 90
+show_missing = true
+skip_covered = false
+
+[json]
+output = report/coverage.json
