@@ -16,10 +16,11 @@
     "patent_angle": "NO — algorithms are public domain; README states this",
     "plan_total_steps": 28,
     "plan_immutable": true,
-    "step_pointer": 27,
+    "step_pointer": 28,
+    "plan_complete": true,
     "last_green_tag": "green-sketchflow-final",
-    "head_sha_last_seen": "27b53e4",
-    "ci_green_last_seen": "27b53e4",
+    "head_sha_last_seen": "fa6c239",
+    "ci_green_last_seen": "fa6c239",
     "repo_url": "https://github.com/neil-cipher/sketchflow"
   },
   "human_block": {
